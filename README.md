@@ -21,6 +21,35 @@ No competimos de frente por el chat entre amigos — eso se pierde por efecto re
 |---|---|
 | [`docs/01-vision.md`](docs/01-vision.md) | Documento fundacional: problema, estrategia, producto, arquitectura, roadmap, costos, marco legal, riesgos |
 | [`docs/02-fase-0.md`](docs/02-fase-0.md) | Guía práctica de validación: las 20 entrevistas, la landing, los trámites y el criterio de salida |
+| [`index.html`](index.html) | La landing de pre-registro. Una sola página, sin dependencias |
+
+---
+
+## Publicar la landing
+
+Son dos pasos y es gratis.
+
+### 1. Conectar el formulario
+
+Sin esto la página se ve bien pero **no guarda los registros**. Está hecho a propósito: prefiere avisar que falta configurarlo antes que tragarse un contacto en silencio.
+
+1. Entrá a [formspree.io](https://formspree.io) y creá una cuenta (el plan gratis alcanza para la validación).
+2. Creá un formulario nuevo. Te va a dar una URL tipo `https://formspree.io/f/xxxxxxxx`.
+3. Abrí `index.html`, buscá la línea `const FORM_ENDPOINT = "";` y pegá la URL entre las comillas.
+
+Cada registro te llega por mail y queda guardado en el panel de Formspree.
+
+### 2. Encender GitHub Pages
+
+En este repo: **Settings → Pages → Source: `Deploy from a branch` → Branch: `main` / `(root)` → Save**.
+
+En un par de minutos la página queda en `https://valentingattiuni-09.github.io/APP/`.
+
+Cuando tengas dominio propio, se apunta desde la misma pantalla en *Custom domain*.
+
+### Verla antes de publicar
+
+Abrí `index.html` en el navegador. No necesita servidor ni instalar nada.
 
 ## Principio innegociable
 
@@ -30,7 +59,7 @@ Lo que Ronda arregla no es el límite de mensajes. Es la arbitrariedad con que s
 
 ## Roadmap
 
-- **Fase 0** · Validación — 4 semanas ← *estamos acá*
+- **Fase 0** · Validación — 4 semanas ← *estamos acá: landing lista, faltan las 20 entrevistas*
 - **Fase 1** · MVP de mensajería, publicado en App Store y Play Store — 8-10 semanas
 - **Fase 2** · Ronda Negocios — 6-8 semanas
 - **Fase 3** · Crecimiento: primeros 100 comercios pagos

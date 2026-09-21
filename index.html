@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ronda — Mensajería para comercios argentinos</title>
+<meta name="description" content="La app de mensajería argentina donde tu negocio es dueño de su canal. Sin bajas por algoritmo, sin cargo por mensaje, con tus datos siempre exportables.">
+<meta property="og:title" content="Ronda — Mensajería para comercios argentinos">
+<meta property="og:description" content="Tu canal de ventas está alquilado. Y te lo pueden cerrar mañana.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#FBFAF8; --surface:#FFFFFF; --surface-2:#F4F3EF;
+  --ink:#111A24; --ink-soft:#33414F; --muted:#5F7183;
+  --accent:#0B6E8F; --accent-bright:#1596BC; --accent-wash:#E6F2F6;
+  --warm:#B35A24; --warm-wash:#FBEEE4;
+  --line:#E3E2DC; --line-strong:#CFCEC6;
+  --on-accent:#FFFFFF;
+  --shadow:0 1px 2px rgba(17,26,36,.05), 0 8px 24px -12px rgba(17,26,36,.18);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0C131A; --surface:#121C25; --surface-2:#18242F;
+    --ink:#E9EEF2; --ink-soft:#BDCBD6; --muted:#8CA0B0;
+    --accent:#3FBBDE; --accent-bright:#5FCDEB; --accent-wash:#12303C;
+    --warm:#E0904F; --warm-wash:#2E2018;
+    --line:#22323F; --line-strong:#334757;
+    --on-accent:#07161C;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0C131A; --surface:#121C25; --surface-2:#18242F;
+  --ink:#E9EEF2; --ink-soft:#BDCBD6; --muted:#8CA0B0;
+  --accent:#3FBBDE; --accent-bright:#5FCDEB; --accent-wash:#12303C;
+  --warm:#E0904F; --warm-wash:#2E2018;
+  --line:#22323F; --line-strong:#334757;
+  --on-accent:#07161C;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--ground); color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%}
+.wrap{max-width:760px; margin:0 auto; padding-inline:20px}
+section{padding-block:clamp(48px,7vw,84px)}
+h1,h2,h3{font-family:"Bricolage Grotesque","IBM Plex Sans",sans-serif; text-wrap:balance; margin:0; letter-spacing:-.02em}
+h1{font-size:clamp(2.1rem,6.2vw,3.5rem); font-weight:800; line-height:1.06}
+h2{font-size:clamp(1.5rem,3.6vw,2.1rem); font-weight:700; line-height:1.15}
+h3{font-size:1.06rem; font-weight:600; line-height:1.3}
+p{margin:0}
+a{color:var(--accent)}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem; font-weight:500;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--muted);
+}
+.lede{font-size:clamp(1.05rem,2.3vw,1.22rem); color:var(--ink-soft); max-width:60ch}
+.stack{display:flex; flex-direction:column}
+.g12{gap:12px} .g16{gap:16px} .g24{gap:24px} .g32{gap:32px} .g40{gap:40px}
+
+/* ---------- header ---------- */
+.top{
+  border-bottom:1px solid var(--line); background:var(--ground);
+  position:sticky; top:0; z-index:20;
+  padding-top:env(safe-area-inset-top,0px);
+}
+.top .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-block:14px}
+.brand{display:flex; align-items:center; gap:10px; font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:1.18rem; letter-spacing:-.02em; color:var(--ink); text-decoration:none}
+.status{
+  font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--warm); background:var(--warm-wash); border:1px solid color-mix(in srgb,var(--warm) 28%,transparent);
+  padding:5px 10px; border-radius:99px; white-space:nowrap;
+}
+
+/* ---------- hero ---------- */
+.hero{padding-block:clamp(44px,8vw,80px) clamp(36px,5vw,56px)}
+.hero h1 em{font-style:normal; color:var(--warm); display:block}
+.ring{width:56px; height:56px; flex:none}
+.ring circle{fill:none; stroke:var(--accent); stroke-width:6}
+.ring .dot{fill:var(--accent-bright); stroke:none}
+@media (prefers-reduced-motion:no-preference){
+  .ring{animation:spin 14s linear infinite; transform-origin:50% 50%}
+  @keyframes spin{to{transform:rotate(360deg)}}
+}
+.cta-row{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font:inherit; font-weight:600; border-radius:10px; padding:13px 22px;
+  border:1px solid transparent; cursor:pointer; text-decoration:none; transition:transform .12s ease, filter .12s ease;
+}
+.btn:hover{filter:brightness(1.08)}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--accent); color:var(--on-accent); border-color:var(--accent)}
+.btn-ghost{background:transparent; color:var(--ink); border-color:var(--line-strong)}
+.fineprint{font-size:.88rem; color:var(--muted)}
+
+/* ---------- numbers ---------- */
+.numbers{border-block:1px solid var(--line); background:var(--surface-2)}
+.numbers .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px}
+.num{display:flex; flex-direction:column; gap:6px}
+.num b{
+  font-family:"Bricolage Grotesque",sans-serif; font-size:clamp(1.7rem,5vw,2.4rem); font-weight:800;
+  letter-spacing:-.03em; line-height:1; color:var(--accent); font-variant-numeric:tabular-nums;
+}
+.num span{font-size:.93rem; color:var(--ink-soft); line-height:1.4}
+@media (max-width:620px){ .numbers .grid{grid-template-columns:1fr; gap:22px} }
+
+/* ---------- comparison ---------- */
+.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:12px; background:var(--surface); box-shadow:var(--shadow)}
+table{border-collapse:collapse; width:100%; min-width:520px; font-size:.95rem}
+th,td{text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+thead th{
+  font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted); font-weight:500; background:var(--surface-2); border-bottom:1px solid var(--line-strong);
+}
+thead th:last-child{color:var(--accent)}
+td:first-child{color:var(--muted)}
+td:last-child{color:var(--ink); font-weight:500}
+@media (max-width:620px){
+  .tablewrap{overflow-x:visible}
+  table{min-width:0}
+  thead{display:none}
+  tbody tr{display:grid; gap:10px; padding:16px; border-bottom:1px solid var(--line)}
+  tbody tr:last-child{border-bottom:none}
+  tbody td{border:none; padding:0; display:grid; gap:3px}
+  tbody td::before{
+    content:attr(data-label); font-family:"IBM Plex Mono",monospace; font-size:.62rem;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+  }
+  tbody td:last-child::before{color:var(--accent)}
+}
+
+/* ---------- differentials ---------- */
+.diffs{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden}
+.diff{background:var(--surface); padding:24px 22px; display:flex; flex-direction:column; gap:9px}
+.diff .k{font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--accent); letter-spacing:.1em}
+.diff p{font-size:.94rem; color:var(--ink-soft)}
+@media (max-width:620px){ .diffs{grid-template-columns:1fr} }
+
+/* ---------- how ---------- */
+.steps{display:flex; flex-direction:column; gap:0; counter-reset:s}
+.step{display:grid; grid-template-columns:auto 1fr; gap:18px; padding-block:20px; border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:none}
+.step .n{
+  counter-increment:s; font-family:"IBM Plex Mono",monospace; font-size:.8rem; color:var(--accent);
+  width:30px; height:30px; border-radius:50%; border:1px solid var(--accent); display:grid; place-items:center;
+}
+.step .n::before{content:counter(s)}
+.step p{font-size:.95rem; color:var(--ink-soft); margin-top:4px}
+
+/* ---------- form ---------- */
+.formcard{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:clamp(22px,4vw,34px); box-shadow:var(--shadow)}
+.field{display:flex; flex-direction:column; gap:6px}
+.field label{font-size:.86rem; font-weight:600; color:var(--ink-soft)}
+.field input, .field select{
+  font:inherit; font-size:.97rem; color:var(--ink); background:var(--ground);
+  border:1px solid var(--line-strong); border-radius:9px; padding:11px 13px; width:100%;
+}
+.field input:focus, .field select:focus, .btn:focus-visible, input[type=checkbox]:focus-visible{
+  outline:2px solid var(--accent-bright); outline-offset:2px;
+}
+.two{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+@media (max-width:560px){ .two{grid-template-columns:1fr} }
+.check{display:flex; gap:10px; align-items:flex-start; font-size:.85rem; color:var(--muted); line-height:1.45}
+.check input{margin-top:3px; flex:none; width:16px; height:16px; accent-color:var(--accent)}
+.msg{border-radius:9px; padding:13px 15px; font-size:.92rem; line-height:1.5}
+.msg.ok{background:var(--accent-wash); color:var(--accent); border:1px solid color-mix(in srgb,var(--accent) 30%,transparent)}
+.msg.err{background:var(--warm-wash); color:var(--warm); border:1px solid color-mix(in srgb,var(--warm) 30%,transparent)}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line); background:var(--surface-2); padding-block:34px; font-size:.87rem; color:var(--muted)}
+footer a{color:var(--muted)}
+footer .wrap{display:flex; flex-direction:column; gap:14px}
+.sources{font-size:.79rem; line-height:1.7}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg class="ring" viewBox="0 0 48 48" aria-hidden="true" style="width:26px;height:26px">
+        <circle cx="24" cy="24" r="17"></circle>
+        <circle class="dot" cx="24" cy="7" r="5"></circle>
+      </svg>
+      Ronda
+    </a>
+    <span class="status">En construcción</span>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap stack g32">
+      <div class="stack g24">
+        <p class="eyebrow">Mensajería argentina para comercios</p>
+        <h1>Tu canal de ventas está alquilado.<em>Y te lo pueden cerrar mañana.</em></h1>
+        <p class="lede">
+          Miles de comercios argentinos venden por WhatsApp. Muchos ya perdieron la cuenta
+          de un día para el otro, sin aviso, sin explicación y sin nadie a quien reclamarle.
+          Con los contactos adentro.
+        </p>
+        <p class="lede">
+          <strong>Ronda es la app de mensajería donde tu negocio es dueño de su canal.</strong>
+          Reglas publicadas en vez de secretas. Aviso antes de suspender. Una persona
+          que te atiende, acá. Y tus datos exportables cuando quieras.
+        </p>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#sumate">Sumarme a la lista</a>
+        <a class="btn btn-ghost" href="#comparacion">Ver la diferencia</a>
+      </div>
+      <p class="fineprint">
+        Todavía no hay app: estamos hablando con comercios antes de construirla.
+        Quien se anote ahora entra a la prueba cerrada y define qué se hace primero.
+      </p>
+    </div>
+  </section>
+
+  <section class="numbers">
+    <div class="wrap">
+      <div class="grid">
+        <div class="num">
+          <b>92–99%</b>
+          <span>de penetración tiene WhatsApp en Argentina. Es infraestructura, no una app más.</span>
+        </div>
+        <div class="num">
+          <b>20–30</b>
+          <span>mensajes por día alcanzan para que te marquen como envío masivo y te suspendan.</span>
+        </div>
+        <div class="num">
+          <b>Ninguno</b>
+          <span>es el número de teléfono al que podés llamar cuando te bajan la cuenta.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="comparacion">
+    <div class="wrap stack g32">
+      <div class="stack g12">
+        <p class="eyebrow">La diferencia</p>
+        <h2>No cambiamos el límite. Cambiamos la arbitrariedad.</h2>
+        <p class="lede">
+          Que exista un límite está bien: sin control, cualquier app de mensajería se llena
+          de spam en seis meses. El problema no es que haya reglas — es que son secretas,
+          se aplican sin aviso y no hay a quién reclamarle.
+        </p>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Hoy, con WhatsApp Business</th><th scope="col">Con Ronda</th></tr>
+          </thead>
+          <tbody>
+            <tr><td data-label="Hoy, con WhatsApp Business">Límites secretos que nadie te dice</td><td data-label="Con Ronda">Límites publicados y claros</td></tr>
+            <tr><td data-label="Hoy, con WhatsApp Business">Te suspenden sin aviso previo</td><td data-label="Con Ronda">Te avisamos antes, y con el motivo</td></tr>
+            <tr><td data-label="Hoy, con WhatsApp Business">Apelación sin plazo ni respuesta</td><td data-label="Con Ronda">Apelación con plazo máximo y una persona</td></tr>
+            <tr><td data-label="Hoy, con WhatsApp Business">Pagás por mensaje, incluso los que rebotan</td><td data-label="Con Ronda">Abono mensual en pesos, previsible</td></tr>
+            <tr><td data-label="Hoy, con WhatsApp Business">Si te caen, perdés los contactos</td><td data-label="Con Ronda">Exportás todo cuando se te cante</td></tr>
+            <tr><td data-label="Hoy, con WhatsApp Business">Soporte por formulario, en inglés</td><td data-label="Con Ronda">Soporte en horario argentino, en castellano</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap stack g32">
+      <div class="stack g12">
+        <p class="eyebrow">Por qué nos importa</p>
+        <h2>Cuatro cosas que Meta no te puede dar</h2>
+      </div>
+      <div class="diffs">
+        <div class="diff">
+          <span class="k">01</span>
+          <h3>No te bajamos la cuenta por un algoritmo</h3>
+          <p>Meta opera a escala planetaria y por eso automatiza todo. Nosotros no: acá hay gente que revisa y que te responde.</p>
+        </div>
+        <div class="diff">
+          <span class="k">02</span>
+          <h3>Los datos son tuyos y te los llevás</h3>
+          <p>Contactos, conversaciones e historial, exportables en formato abierto, siempre. Suena en contra nuestra. Es la razón para confiarnos el canal.</p>
+        </div>
+        <div class="diff">
+          <span class="k">03</span>
+          <h3>Argentino, no traducido</h3>
+          <p>Precios en pesos, factura A/B/C, Mercado Pago, y soporte que entiende qué es un monotributista. Funciona con poca señal y en teléfonos de gama baja.</p>
+        </div>
+        <div class="diff">
+          <span class="k">04</span>
+          <h3>Tu cliente elige recibirte</h3>
+          <p>Se suscribe al comercio que quiere y se baja en un toque. Por eso el que queda suscripto te lee de verdad, en vez de mandarte a spam.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap stack g32">
+      <div class="stack g12">
+        <p class="eyebrow">Cómo funciona</p>
+        <h2>Tres pasos, y el canal es tuyo</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="n" aria-hidden="true"></span>
+          <div>
+            <h3>Ponés el QR en el mostrador</h3>
+            <p>También va como link en tu Instagram o en tu web. Tu cliente escanea y se suscribe a tu comercio.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="n" aria-hidden="true"></span>
+          <div>
+            <h3>Le escribís sin miedo</h3>
+            <p>Ofertas, turnos, estado del pedido. A gente que pidió recibirlo, con un abono fijo en pesos y sin contador de mensajes corriendo.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="n" aria-hidden="true"></span>
+          <div>
+            <h3>El canal no te lo puede sacar nadie</h3>
+            <p>Y si algún día querés irte, te llevás la base de suscriptores entera. Sin pedir permiso.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sumate">
+    <div class="wrap stack g32">
+      <div class="stack g12">
+        <p class="eyebrow">Prueba cerrada</p>
+        <h2>Contanos de tu comercio</h2>
+        <p class="lede">
+          Estamos hablando con 20 comercios argentinos antes de escribir una línea de código.
+          Si dejás tus datos te escribimos para una charla de 15 minutos — y entrás primero
+          cuando esté la app.
+        </p>
+      </div>
+
+      <form class="formcard stack g24" id="form" novalidate>
+        <div class="two">
+          <div class="field">
+            <label for="comercio">Nombre del comercio</label>
+            <input id="comercio" name="comercio" type="text" required autocomplete="organization" placeholder="Panadería La Esquina">
+          </div>
+          <div class="field">
+            <label for="rubro">Rubro</label>
+            <select id="rubro" name="rubro" required>
+              <option value="">Elegí uno</option>
+              <option>Indumentaria</option>
+              <option>Gastronomía</option>
+              <option>Servicios profesionales</option>
+              <option>Salud y estética</option>
+              <option>Inmobiliaria</option>
+              <option>Comercio minorista</option>
+              <option>E-commerce</option>
+              <option>Otro</option>
+            </select>
+          </div>
+        </div>
+        <div class="two">
+          <div class="field">
+            <label for="email">Mail</label>
+            <input id="email" name="email" type="email" required autocomplete="email" placeholder="vos@tucomercio.com.ar">
+          </div>
+          <div class="field">
+            <label for="telefono">WhatsApp</label>
+            <input id="telefono" name="telefono" type="tel" required autocomplete="tel" placeholder="11 5555-5555">
+          </div>
+        </div>
+        <div class="field">
+          <label for="suspendido">¿Alguna vez te suspendieron o te bajaron la cuenta?</label>
+          <select id="suspendido" name="suspendido" required>
+            <option value="">Elegí una</option>
+            <option>Sí, y perdí ventas por eso</option>
+            <option>Sí, pero la recuperé rápido</option>
+            <option>No, pero me preocupa que pase</option>
+            <option>No, nunca tuve problemas</option>
+          </select>
+        </div>
+        <label class="check">
+          <input type="checkbox" id="consent" name="consent" required>
+          <span>Acepto que me contacten por mail o WhatsApp sobre Ronda. Mis datos no se comparten con terceros y puedo pedir que los borren cuando quiera.</span>
+        </label>
+        <div class="cta-row">
+          <button class="btn btn-primary" type="submit" id="submit">Sumarme a la lista</button>
+          <span class="fineprint">Gratis. Sin compromiso.</span>
+        </div>
+        <div id="msg" class="msg" hidden></div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--ink-soft)">Ronda</strong> — proyecto en etapa de validación. Todavía no es un producto disponible.</p>
+    <p class="sources">
+      Datos citados: penetración y uso de WhatsApp en Argentina según
+      <a href="https://mercado.com.ar/tendencias/whatsapp-se-consolida-como-infraestructura-social-en-argentina" target="_blank" rel="noopener">informe Infobip</a>
+      e <a href="https://www.infobae.com/tecno/2025/04/04/radiografia-digital-que-hacen-los-argentinos-en-internet-y-en-que-redes-sociales-pasan-mas-tiempo/" target="_blank" rel="noopener">Infobae</a>;
+      políticas de suspensión según el
+      <a href="https://faq.whatsapp.com/723378546580115" target="_blank" rel="noopener">Centro de Ayuda de WhatsApp</a>
+      y la <a href="https://developers.facebook.com/documentation/business-messaging/whatsapp/policy-enforcement" target="_blank" rel="noopener">documentación de Meta</a>.
+      Tratamiento de datos conforme a la <a href="https://www.argentina.gob.ar/justicia/derechofacil/leysimple/datos-personales" target="_blank" rel="noopener">Ley 25.326</a>.
+    </p>
+  </div>
+</footer>
+
+<script>
+// ---------------------------------------------------------------------------
+// CONFIGURACIÓN DEL FORMULARIO
+// Pegá acá el endpoint de Formspree (https://formspree.io — plan gratis).
+// Se crea en 2 minutos: creás el form, te dan una URL tipo
+// https://formspree.io/f/xxxxxxxx y la pegás entre las comillas de abajo.
+// Mientras esté vacío, el formulario avisa que falta configurarlo en vez de
+// tragarse los registros en silencio.
+// ---------------------------------------------------------------------------
+const FORM_ENDPOINT = "";
+
+const form = document.getElementById("form");
+const msgEl = document.getElementById("msg");
+const submitBtn = document.getElementById("submit");
+
+function show(kind, text){
+  msgEl.className = "msg " + kind;
+  msgEl.textContent = text;
+  msgEl.hidden = false;
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  if (!form.checkValidity()) {
+    show("err", "Faltan datos. Revisá los campos marcados y probá de nuevo.");
+    form.reportValidity();
+    return;
+  }
+
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  if (!FORM_ENDPOINT) {
+    show("err", "El formulario todavía no está conectado. Configurá FORM_ENDPOINT en index.html antes de compartir la página.");
+    console.warn("Registro capturado pero NO enviado (falta FORM_ENDPOINT):", data);
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Enviando…";
+
+  try {
+    const res = await fetch(FORM_ENDPOINT, {
+      method: "POST",
+      headers: { "Accept": "application/json", "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    form.reset();
+    show("ok", "Listo, quedaste anotado. Te escribimos en los próximos días para coordinar la charla.");
+  } catch (err) {
+    show("err", "No pudimos enviar el formulario. Probá de nuevo en un rato, o escribinos directo por mail.");
+    console.error(err);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Sumarme a la lista";
+  }
+});
+</script>
+
+</body>
+</html>
