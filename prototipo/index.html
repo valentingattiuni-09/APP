@@ -1,0 +1,1111 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<title>Ronda — Prototipo</title>
+<meta name="description" content="Prototipo jugable de Ronda: el alta con @, la ronda que se abre a los cinco, los temas adentro del grupo y los audios con transcripción.">
+<meta name="theme-color" content="#151219">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@500&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* ---------------------------------------------------------------
+   Ronda — prototipo
+   La pantalla del teléfono vive siempre en oscuro: es la app.
+   El marco de alrededor sigue el tema de quien mira.
+   --------------------------------------------------------------- */
+:root{
+  /* marco: claro */
+  --page:#EFECE6; --page-2:#E3DFD7; --page-ink:#1B1720; --page-ink-2:#6A6272;
+  --page-line:#D3CEC4;
+  color-scheme:light;
+
+  /* app: fijo, oscuro */
+  --bg:#151219;
+  --surface:#1E1A24;
+  --raised:#2A2533;
+  --line:#342E3F;
+  --line-soft:#272231;
+  --ink:#F4F0EA;
+  --ink-2:#B3A8BE;
+  --ink-3:#7C7189;
+  --accent:#F2793D;
+  --accent-deep:#C55A28;
+  --on-accent:#1E0B02;
+  --teal:#6FD0C0;
+  --bubble:#2A2533;
+  --danger:#F4586B;
+  --note:#FFD66B;
+  --note-ink:#332600;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --page:#100E14; --page-2:#191520; --page-ink:#EDE8F0; --page-ink-2:#9A90A6;
+    --page-line:#2A2432;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --page:#100E14; --page-2:#191520; --page-ink:#EDE8F0; --page-ink-2:#9A90A6;
+  --page-line:#2A2432;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  background:var(--page); color:var(--page-ink);
+  font-family:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.45; -webkit-font-smoothing:antialiased;
+  overflow:hidden;
+}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input{font:inherit}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:6px}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* ---------- barra de control (fuera del teléfono) ---------- */
+.bar{
+  position:fixed; inset:0 0 auto 0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:8px 16px; padding-top:calc(8px + env(safe-area-inset-top,0px));
+  background:var(--page); border-bottom:1px solid var(--page-line);
+}
+.bar b{font-family:"Familjen Grotesk",sans-serif;font-weight:700;font-size:15px;letter-spacing:-.01em}
+.bar .tag{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10px; font-weight:500;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--page-ink-2);
+}
+.bar .acts{display:flex;gap:6px}
+.bar button{
+  padding:5px 11px; border-radius:999px; border:1px solid var(--page-line);
+  font-size:12.5px; font-weight:500; color:var(--page-ink-2); background:var(--page-2);
+}
+.bar button:hover{color:var(--page-ink)}
+.bar button[aria-pressed="true"]{background:var(--note);border-color:var(--note);color:var(--note-ink)}
+
+/* ---------- teléfono ---------- */
+.stage{
+  height:100%; display:flex; align-items:center; justify-content:center;
+  padding:calc(54px + env(safe-area-inset-top,0px)) 16px 16px;
+}
+.device{
+  position:relative; overflow:hidden;
+  width:min(390px,100%); height:min(820px,100%);
+  background:var(--bg); color:var(--ink);
+  border-radius:38px; border:1px solid var(--page-line);
+  box-shadow:0 30px 70px -30px rgba(0,0,0,.55), 0 2px 8px rgba(0,0,0,.12);
+}
+@media (max-width:760px){
+  .stage{padding:calc(46px + env(safe-area-inset-top,0px)) 0 0}
+  .device{width:100%;height:100%;border-radius:0;border:0;box-shadow:none}
+}
+
+/* ---------- pantallas ---------- */
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg)}
+.screen[hidden]{display:none!important}
+.scroll{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.pad{padding:0 20px}
+
+h1,h2,h3{font-family:"Familjen Grotesk","Instrument Sans",sans-serif;margin:0;letter-spacing:-.02em;text-wrap:balance}
+h1{font-size:30px;font-weight:700;line-height:1.08}
+h2{font-size:21px;font-weight:700;line-height:1.15}
+h3{font-size:15px;font-weight:700}
+p{margin:0}
+.dim{color:var(--ink-2)}
+.dim3{color:var(--ink-3)}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;font-weight:500;letter-spacing:.13em;text-transform:uppercase}
+.col{display:flex;flex-direction:column}
+.g6{gap:6px}.g10{gap:10px}.g14{gap:14px}.g20{gap:20px}.g28{gap:28px}
+
+/* ---------- botones ---------- */
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:15px 18px;border-radius:15px;
+  background:var(--accent);color:var(--on-accent);font-weight:600;font-size:15.5px;
+  transition:transform .12s ease, filter .12s ease;
+}
+.btn:hover{filter:brightness(1.06)}
+.btn:active{transform:scale(.985)}
+.btn[disabled]{background:var(--raised);color:var(--ink-3);cursor:default;filter:none}
+.btn.ghost{background:var(--raised);color:var(--ink)}
+.btn.line{background:transparent;border:1px solid var(--line);color:var(--ink-2)}
+.link{color:var(--teal);font-weight:500;font-size:14px}
+
+/* ---------- campos ---------- */
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.inp{
+  display:flex;align-items:center;gap:2px;
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 15px;
+}
+.inp:focus-within{border-color:var(--accent)}
+.inp span{color:var(--ink-3);font-weight:600}
+.inp input{flex:1;min-width:0;background:none;border:0;color:var(--ink);font-size:16px;font-weight:500;outline:none}
+.inp input::placeholder{color:var(--ink-3)}
+.hint{font-size:12.5px;color:var(--ink-3);line-height:1.4}
+
+/* ---------- chips ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  padding:8px 13px;border-radius:999px;border:1px solid var(--line);
+  background:var(--surface);color:var(--ink-2);font-size:13.5px;font-weight:500;
+  transition:background .12s ease,color .12s ease,border-color .12s ease;
+}
+.chip[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#0B211D}
+.chip.flat{background:transparent}
+.chip.flat[aria-pressed="true"]{background:var(--raised);border-color:var(--raised);color:var(--ink)}
+
+/* ---------- marca ---------- */
+.mark{width:48px;height:48px;border-radius:50%;border:3px solid var(--accent);position:relative;flex:none}
+.mark::after{content:"";position:absolute;width:11px;height:11px;border-radius:50%;background:var(--teal);right:-4px;bottom:4px}
+.mark.sm{width:26px;height:26px;border-width:2px}
+.mark.sm::after{width:7px;height:7px;right:-2px;bottom:2px}
+
+/* ---------- avatares ---------- */
+.av{
+  width:44px;height:44px;border-radius:15px;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Familjen Grotesk",sans-serif;font-weight:700;font-size:16px;color:#14101A;
+}
+.av.sm{width:26px;height:26px;border-radius:9px;font-size:11px}
+.av.xs{width:21px;height:21px;border-radius:7px;font-size:9.5px}
+
+/* ---------- encabezado de app ---------- */
+.head{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px 12px;border-bottom:1px solid var(--line-soft);background:var(--bg);
+}
+.head .back{font-size:22px;line-height:1;color:var(--ink-2);padding:2px 4px}
+.head .ttl{flex:1;min-width:0}
+.head .ttl b{display:block;font-family:"Familjen Grotesk",sans-serif;font-size:17px;font-weight:700;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.head .ttl small{display:block;font-size:12px;color:var(--ink-3)}
+
+/* ---------- bandeja ---------- */
+.filters{display:flex;gap:7px;padding:12px 16px 6px}
+.row{display:flex;gap:12px;padding:12px 16px;align-items:center;width:100%;text-align:left;border-bottom:1px solid var(--line-soft)}
+.row:hover{background:var(--surface)}
+.row .mid{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.row .top{display:flex;align-items:baseline;gap:8px}
+.row .top b{font-size:15.5px;font-weight:600;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .top time{font-size:11.5px;color:var(--ink-3);flex:none}
+.row .prev{font-size:13.5px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .prev i{font-style:normal;color:var(--teal)}
+.badge{
+  min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--accent);color:var(--on-accent);
+  font-size:11.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;
+}
+
+/* ---------- temas ---------- */
+.temas{display:flex;gap:6px;padding:10px 16px;overflow-x:auto;border-bottom:1px solid var(--line-soft);scrollbar-width:none}
+.temas::-webkit-scrollbar{display:none}
+.tema{flex:none;padding:7px 12px;border-radius:10px;font-size:13.5px;font-weight:500;color:var(--ink-3);position:relative;white-space:nowrap}
+.tema[aria-selected="true"]{background:var(--raised);color:var(--ink)}
+.tema em{position:absolute;top:4px;right:4px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+
+/* ---------- conversación ---------- */
+.efim{display:flex;gap:4px;padding:8px 16px;align-items:center;border-bottom:1px solid var(--line-soft);background:var(--surface)}
+.efim .lbl{font-size:11.5px;color:var(--ink-3);margin-right:auto}
+.efim button{padding:5px 10px;border-radius:8px;font-size:12px;font-weight:600;color:var(--ink-3)}
+.efim button[aria-pressed="true"]{background:var(--raised);color:var(--teal)}
+
+.msgs{display:flex;flex-direction:column;gap:3px;padding:14px 14px 18px}
+.msg{max-width:82%;display:flex;flex-direction:column;gap:3px;align-self:flex-start}
+.msg.me{align-self:flex-end;align-items:flex-end}
+.msg + .msg.start{margin-top:11px}
+.who{font-size:11.5px;font-weight:600;padding-left:12px}
+.bub{
+  background:var(--bubble);border-radius:17px 17px 17px 6px;padding:9px 13px 8px;
+  font-size:15px;line-height:1.38;cursor:pointer;position:relative;
+}
+.msg.me .bub{background:var(--accent);color:var(--on-accent);border-radius:17px 17px 6px 17px}
+.msg:not(.start) .bub{border-radius:17px}
+.bub .t{font-size:10.5px;opacity:.55;float:right;margin:6px 0 0 10px;line-height:1}
+.quote{
+  border-left:2.5px solid var(--teal);padding:2px 0 2px 8px;margin-bottom:5px;
+  font-size:13px;line-height:1.3;opacity:.8;
+}
+.quote b{display:block;font-size:12px;color:var(--teal)}
+.msg.me .quote{border-color:var(--on-accent);opacity:.65}
+.msg.me .quote b{color:var(--on-accent)}
+.sys{align-self:center;max-width:90%;text-align:center;font-size:12px;color:var(--ink-3);padding:7px 12px;background:var(--surface);border-radius:10px;margin:8px 0}
+.reacts{display:flex;gap:4px;margin-top:-2px;padding-left:8px}
+.msg.me .reacts{padding:0 8px 0 0}
+.reacts span{background:var(--raised);border:1px solid var(--line);border-radius:999px;padding:1px 7px;font-size:12px}
+
+/* audio */
+.audio{display:flex;align-items:center;gap:11px;min-width:216px}
+.play{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;flex:none;font-size:12px}
+.msg.me .play{background:rgba(0,0,0,.16)}
+.wave{flex:1;display:flex;align-items:center;gap:2px;height:26px}
+.wave i{flex:1;background:currentColor;opacity:.3;border-radius:2px;transition:opacity .15s ease}
+.wave i.on{opacity:.95}
+.spd{font-size:11px;font-weight:700;padding:3px 6px;border-radius:7px;background:rgba(255,255,255,.12);flex:none}
+.msg.me .spd{background:rgba(0,0,0,.16)}
+.tr{margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.14);font-size:13.5px;line-height:1.45}
+.msg.me .tr{border-color:rgba(0,0,0,.18)}
+.tr .cue{cursor:pointer;border-radius:3px}
+.tr .cue:hover{background:rgba(255,255,255,.14)}
+.tr-btn{font-size:11.5px;font-weight:600;opacity:.6;margin-top:7px;display:flex;align-items:center;gap:5px}
+
+/* barra de reacciones */
+.rbar{
+  position:absolute;z-index:8;display:flex;gap:2px;padding:5px;
+  background:var(--raised);border:1px solid var(--line);border-radius:999px;
+  box-shadow:0 10px 26px -10px rgba(0,0,0,.7);
+}
+.rbar button{padding:4px 6px;font-size:18px;line-height:1;border-radius:999px}
+.rbar button:hover{background:var(--surface)}
+
+/* ---------- barra de escritura ---------- */
+.compose{
+  display:flex;gap:9px;align-items:flex-end;padding:11px 14px;
+  padding-bottom:calc(11px + env(safe-area-inset-bottom,0px));
+  border-top:1px solid var(--line-soft);background:var(--bg);
+}
+.compose .box{flex:1;display:flex;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:9px 15px}
+.compose input{flex:1;min-width:0;background:none;border:0;outline:none;color:var(--ink);font-size:16px}
+.compose input::placeholder{color:var(--ink-3)}
+.send{width:42px;height:42px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:flex;align-items:center;justify-content:center;flex:none;font-size:17px}
+
+/* ---------- umbral ---------- */
+.ring{position:relative;width:118px;height:118px;margin:0 auto}
+.ring svg{transform:rotate(-90deg)}
+.ring .n{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:"Familjen Grotesk",sans-serif;
+}
+.ring .n b{font-size:38px;font-weight:700;line-height:1}
+.ring .n small{font-size:11px;color:var(--ink-3);letter-spacing:.06em}
+.joins{display:flex;flex-direction:column;gap:9px}
+.join{display:flex;align-items:center;gap:10px;font-size:14px;animation:pop .28s ease both}
+.join .tick{color:var(--teal);font-size:12px;margin-left:auto}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.slot{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink-3)}
+.slot .dot{width:26px;height:26px;border-radius:9px;border:1.5px dashed var(--line);flex:none}
+
+/* ---------- ajustes ---------- */
+.set{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line-soft);width:100%;text-align:left}
+.set .mid{flex:1;min-width:0}
+.set b{display:block;font-size:14.5px;font-weight:600}
+.set small{display:block;font-size:12.5px;color:var(--ink-3);line-height:1.35}
+.set.warn b{color:var(--danger)}
+.sw{width:44px;height:26px;border-radius:999px;background:var(--raised);position:relative;flex:none;transition:background .15s ease}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--ink-3);transition:transform .15s ease,background .15s ease}
+.sw[aria-pressed="true"]{background:rgba(111,208,192,.25)}
+.sw[aria-pressed="true"]::after{transform:translateX(18px);background:var(--teal)}
+
+/* ---------- notas ---------- */
+.notes{
+  position:absolute;left:12px;right:12px;bottom:12px;z-index:30;
+  background:var(--note);color:var(--note-ink);border-radius:16px;padding:13px 15px;
+  box-shadow:0 18px 40px -16px rgba(0,0,0,.7);animation:pop .25s ease both;
+}
+.notes .mono{color:rgba(51,38,0,.6)}
+.notes p{font-size:13.5px;line-height:1.42;margin-top:5px}
+.notes .x{position:absolute;top:8px;right:10px;font-size:15px;opacity:.5}
+
+.toast{
+  position:absolute;left:50%;bottom:86px;transform:translateX(-50%);z-index:40;
+  background:var(--raised);border:1px solid var(--line);color:var(--ink);
+  padding:9px 15px;border-radius:999px;font-size:13px;white-space:nowrap;
+  animation:pop .2s ease both;
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div style="display:flex;align-items:center;gap:9px;min-width:0">
+    <b>Ronda</b>
+    <span class="tag">prototipo · fase 0</span>
+  </div>
+  <div class="acts">
+    <button id="btn-notes" aria-pressed="false">Notas</button>
+    <button id="btn-reset">Reiniciar</button>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="device" id="device"></div>
+</div>
+
+<script>
+"use strict";
+
+/* =====================================================================
+   Estado
+   ===================================================================== */
+
+const TEMAS_SUGERIDOS = ["general","salidas","parcial","memes","guita","fotos","musica","fixture"];
+const PALETA = ["#F2793D","#6FD0C0","#F4C24A","#C58BF2","#7FB4F5","#F4869B","#9BDB6C"];
+
+const PERSONAS = {
+  juli:  {n:"Juli",  u:"@juli",   c:0},
+  fran:  {n:"Fran",  u:"@fran0",  c:1},
+  mica:  {n:"Mica",  u:"@micaa",  c:2},
+  nacho: {n:"Nacho", u:"@nachoo", c:3},
+  tomi:  {n:"Tomi",  u:"@tomi",   c:4},
+  caro:  {n:"Caro",  u:"@carop",  c:5},
+  lu:    {n:"Lu",    u:"@lu",     c:6}
+};
+
+let S, convos;
+
+function estadoInicial(){
+  S = {
+    pantalla:"splash",
+    yo:{n:"Valen", u:"@valen"},
+    convo:null,
+    tema:null,
+    filtro:"todo",
+    notas:false,
+    umbral:1,
+    miRonda:{nombre:"", temas:["general"]},
+    leido:true,
+    escribiendo:false
+  };
+  convos = {};
+  sembrar();
+}
+
+/* Cada conversación: título, tipo, mensajes y una cola de respuestas
+   con guion. Al enviar algo, contesta el guion. */
+function sembrar(){
+  convos["p:juli"] = {
+    tipo:"priv", con:"juli", titulo:"Juli", sub:"@juli", efimero:"guarda", hora:"14:32",
+    msgs:[
+      {de:"juli", t:"che pasaste el link al grupo de la comisión?"},
+      {de:"yo",   t:"sí, ya entraron tres", react:{"🔥":1}},
+      {de:"juli", tipo:"audio", dur:"1:12",
+        tr:"Bueno pero decile a Fran que entre porque tiene todos los apuntes del segundo parcial y los está mandando por mail como un señor de cuarenta años."},
+      {de:"yo",   t:"jajajaja se lo digo"}
+    ],
+    cola:[
+      "obvio que sí",
+      "me gusta que no se ve el “en línea”, no sabés si te estoy ignorando 😌",
+      "che y esto guarda los mensajes o se borran?",
+      "avisame cuando esté la app posta"
+    ]
+  };
+
+  convos["p:fran"] = {
+    tipo:"priv", con:"fran", titulo:"Fran", sub:"@fran0", efimero:"guarda", hora:"13:05",
+    msgs:[
+      {de:"fran", t:"te paso el apunte por acá que el otro no me deja subir el pdf"},
+      {de:"fran", t:"84 páginas, suerte"},
+      {de:"yo",   t:"gracias rey", react:{"💀":2}}
+    ],
+    cola:["listo, subido","decime si te llegó","mañana te paso el resumen"]
+  };
+
+  convos["p:mica"] = {
+    tipo:"priv", con:"mica", titulo:"Mica", sub:"@micaa", efimero:"al-leer", hora:"ayer",
+    msgs:[
+      {sys:"Mica puso los mensajes en “se borran al leer”."},
+      {de:"mica", t:"esto es lo único que no le puedo mandar a mi vieja por accidente"},
+      {de:"yo",   t:"ese es literalmente el punto"}
+    ],
+    cola:["jajaja bien","ok me convenciste","¿y si te sacan captura?"]
+  };
+
+  convos["g:pibes"] = {
+    tipo:"ronda", titulo:"Los pibes", miembros:7, efimero:"guarda", hora:"15:10",
+    gente:["nacho","caro","tomi","lu"],
+    temas:{
+      general:[
+        {de:"nacho", t:"alguien va el sábado?"},
+        {de:"caro",  t:"yo voy pero salgo tarde del laburo"},
+        {de:"tomi",  t:"paso a buscarte", cita:{de:"Caro", t:"yo voy pero salgo tarde del laburo"}}
+      ],
+      futbol:[
+        {de:"tomi",  t:"faltan dos para el jueves"},
+        {de:"nacho", t:"yo juego"},
+        {de:"lu",    tipo:"audio", dur:"0:38",
+          tr:"Che yo no puedo el jueves porque tengo el final, pero anoten que el otro jueves sí, y si consiguen cancha en el club de siempre avisen antes de las seis."}
+      ],
+      memes:[
+        {de:"caro", t:"no puedo creer que exista un grupo donde no está mi tía"},
+        {de:"lu",   t:"el grupo de la familia quedó allá y allá se queda", react:{"😂":4,"🙏":2}}
+      ]
+    },
+    cola:["jajaja tal cual","+1","dale avisame"]
+  };
+}
+
+/* =====================================================================
+   Utilidades
+   ===================================================================== */
+
+const $ = (s,r) => (r||document).querySelector(s);
+const dev = () => document.getElementById("device");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+/* Una "referencia" es la clave de una persona ("juli", "yo") o una ronda
+   servida como {n, c} por pinAv(). Las dos resuelven nombre y color. */
+function nombre(p){
+  if(p && typeof p === "object") return p.n;
+  if(p === "yo") return S.yo.n;
+  return PERSONAS[p] ? PERSONAS[p].n : String(p || "?");
+}
+function color(p){
+  if(p && typeof p === "object") return PALETA[p.c % PALETA.length];
+  return PALETA[(PERSONAS[p] ? PERSONAS[p].c : 0) % PALETA.length];
+}
+function inicial(p){ return nombre(p).slice(0,1).toUpperCase(); }
+
+function hora(){
+  const d = new Date();
+  return String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0");
+}
+function avatar(p, cls){
+  return '<div class="av ' + (cls||"") + '" style="background:' + color(p) + '">' + esc(inicial(p)) + '</div>';
+}
+function toast(txt){
+  const vieja = $(".toast"); if(vieja) vieja.remove();
+  const el = document.createElement("div");
+  el.className = "toast"; el.textContent = txt;
+  dev().appendChild(el);
+  setTimeout(() => el.remove(), 1900);
+}
+
+/* =====================================================================
+   Notas del entrevistador — apagadas por default.
+   La Fase 0 dice: mostrar el prototipo sin explicar nada.
+   ===================================================================== */
+
+const NOTAS = {
+  splash:   ["La promesa, en una línea","El prototipo no explica nada al entrar: si no se entiende solo, el problema es de comunicación, no de idea."],
+  alta:     ["Sos un @, no un número","La decisión de producto más importante. Sin SMS obligatorio el costo por usuario se desploma, y podés hablar con alguien sin darle tu teléfono."],
+  ronda:    ["Se crea un grupo, no una cuenta","El alta termina creando una ronda con temas adentro. La unidad de migración es el grupo: nadie se muda solo."],
+  umbral:   ["La ronda se abre a los cinco","La traba es a propósito. El que llega solo a una app vacía se pierde igual; el umbral lo convierte en reclutador."],
+  bandeja:  ["Sin algoritmo","Ordenada por cuándo llegó el mensaje y nada más. Sin destacados, sin recomendados, sin publicidad."],
+  ronda_v:  ["Temas adentro del grupo","Lo que WhatsApp no tiene: podés seguir #parcial y silenciar #memes sin irte del grupo."],
+  chat:     ["Audio con transcripción, efímero visible","Tocá el audio para verlo transcripto. La perilla de efímero está arriba, no escondida en un submenú. Y no hay “en línea” ni “últ. vez” en ningún lado."],
+  vos:      ["Lo que exigen las tiendas","Bloquear, reportar y borrar la cuenta desde adentro de la app. Apple rechaza apps sociales que no lo tengan."]
+};
+
+function pintarNotas(){
+  const vieja = $(".notes"); if(vieja) vieja.remove();
+  const hueco = $(".hueco-nota"); if(hueco) hueco.remove();
+  if(!S.notas) return;
+  const n = NOTAS[S.pantalla]; if(!n) return;
+
+  const el = document.createElement("div");
+  el.className = "notes";
+  el.innerHTML = '<button class="x" aria-label="Cerrar nota">✕</button>' +
+    '<div class="mono">' + esc(n[0]) + '</div><p>' + esc(n[1]) + '</p>';
+  el.querySelector(".x").onclick = () => { S.notas = false; sincNotas(); pintarNotas(); };
+  dev().appendChild(el);
+
+  /* La nota flota sobre la pantalla: se apoya arriba de la barra de
+     escritura y le deja lugar al contenido para que no tape nada. */
+  const comp = $(".compose");
+  el.style.bottom = (comp ? comp.offsetHeight + 10 : 12) + "px";
+  const sc = $(".scroll");
+  if(sc){
+    const d = document.createElement("div");
+    d.className = "hueco-nota";
+    d.style.height = (el.offsetHeight + 20) + "px";
+    d.setAttribute("aria-hidden","true");
+    sc.appendChild(d);
+    if(S.pantalla === "chat" || S.pantalla === "ronda_v") alFinal();
+  }
+}
+function sincNotas(){
+  document.getElementById("btn-notes").setAttribute("aria-pressed", S.notas ? "true" : "false");
+}
+
+/* =====================================================================
+   Router
+   ===================================================================== */
+
+function ir(p){ S.pantalla = p; pintar(); }
+
+function pintar(){
+  const d = dev();
+  const vistas = {
+    splash: vSplash, alta: vAlta, ronda: vRonda, umbral: vUmbral,
+    bandeja: vBandeja, ronda_v: vRondaVista, chat: vChat, vos: vVos
+  };
+  d.innerHTML = "";
+  const s = document.createElement("section");
+  s.className = "screen";
+  d.appendChild(s);
+  vistas[S.pantalla](s);
+  pintarNotas();
+}
+
+/* =====================================================================
+   1 · Bienvenida
+   ===================================================================== */
+
+function vSplash(s){
+  s.innerHTML =
+    '<div class="scroll pad col" style="gap:24px;padding-top:7%;padding-bottom:40px">' +
+      '<div class="mark"></div>' +
+      '<div class="col g14">' +
+        '<h1>Hablá con tu gente.<br>Sin tu familia adentro.</h1>' +
+        '<p class="dim" style="font-size:16px">Ronda es donde va la conversación que no querés en el mismo lugar que el grupo del curso con las madres.</p>' +
+      '</div>' +
+      '<ul class="col g10" style="margin:0;padding:0;list-style:none">' +
+        liPunto("Sos un @, no un número de teléfono") +
+        liPunto("Grupos con temas adentro, no un pozo de 400 mensajes") +
+        liPunto("Sin “en línea”, sin “últ. vez”, sin nadie mirando") +
+        liPunto("Los audios largos vienen transcriptos") +
+      '</ul>' +
+      '<button class="btn" id="go">Empezar</button>' +
+      '<p class="hint" style="text-align:center">Prototipo. No guarda nada ni manda nada a ningún lado.</p>' +
+    '</div>';
+  $("#go", s).onclick = () => ir("alta");
+}
+function liPunto(t){
+  return '<li style="display:flex;gap:10px;align-items:flex-start">' +
+    '<span style="color:var(--teal);font-size:13px;line-height:1.5">◆</span>' +
+    '<span class="dim" style="font-size:14.5px">' + esc(t) + '</span></li>';
+}
+
+/* =====================================================================
+   2 · Alta con @
+   ===================================================================== */
+
+function vAlta(s){
+  s.innerHTML =
+    '<div class="head"><button class="back" id="b">‹</button><div class="ttl"><b>Tu cuenta</b></div></div>' +
+    '<div class="scroll pad col g20" style="padding-top:22px;padding-bottom:22px">' +
+      '<div class="field"><label for="f-user">Elegí tu usuario</label>' +
+        '<div class="inp"><span>@</span><input id="f-user" value="valen" autocomplete="off" spellcheck="false" maxlength="16"></div>' +
+        '<p class="hint">Es con esto que te encuentran. No se puede cambiar después.</p></div>' +
+      '<div class="field"><label for="f-name">Cómo te van a ver</label>' +
+        '<div class="inp"><input id="f-name" value="Valen" autocomplete="off" maxlength="24"></div></div>' +
+      '<div class="field"><label for="f-nac">Fecha de nacimiento</label>' +
+        '<div class="inp"><input id="f-nac" value="14/03/2005" inputmode="numeric" autocomplete="off"></div>' +
+        '<p class="hint">Ronda es para mayores de 16. La fecha después no se edita sola: hay que pedirlo.</p></div>' +
+      '<div style="background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:14px 15px">' +
+        '<div class="mono" style="color:var(--teal)">No te pedimos</div>' +
+        '<p class="dim" style="font-size:13.5px;margin-top:6px">Tu número de teléfono, tu agenda de contactos, tu mail de la escuela ni permiso para nada. El teléfono es opcional y sirve sólo para recuperar la cuenta si la perdés.</p>' +
+      '</div>' +
+      '<button class="btn" id="go">Crear cuenta</button>' +
+    '</div>';
+  $("#b", s).onclick = () => ir("splash");
+  $("#go", s).onclick = () => {
+    const u = ($("#f-user", s).value || "vos").trim().replace(/[^a-z0-9_.]/gi,"").toLowerCase() || "vos";
+    const n = ($("#f-name", s).value || "Vos").trim() || "Vos";
+    S.yo = { n: n, u: "@" + u };
+    ir("ronda");
+  };
+}
+
+/* =====================================================================
+   3 · Crear la ronda
+   ===================================================================== */
+
+function vRonda(s){
+  const sel = S.miRonda.temas;
+  s.innerHTML =
+    '<div class="head"><button class="back" id="b">‹</button><div class="ttl"><b>Tu primera ronda</b></div></div>' +
+    '<div class="scroll pad col g20" style="padding-top:22px;padding-bottom:22px">' +
+      '<div class="col g6"><h2>¿Con quiénes te querés ir de WhatsApp?</h2>' +
+      '<p class="dim" style="font-size:14.5px">Una ronda es tu grupo. Adentro tiene temas, así no se mezcla todo.</p></div>' +
+      '<div class="field"><label for="f-r">Nombre de la ronda</label>' +
+        '<div class="inp"><input id="f-r" placeholder="Comisión 4" value="' + esc(S.miRonda.nombre) + '" maxlength="28" autocomplete="off"></div></div>' +
+      '<div class="field"><label>Temas adentro</label>' +
+        '<div class="chips" id="temas">' +
+          TEMAS_SUGERIDOS.map(t =>
+            '<button class="chip" data-t="' + t + '" aria-pressed="' + (sel.indexOf(t) >= 0) + '">#' + t + '</button>'
+          ).join("") +
+        '</div>' +
+        '<p class="hint">Después se pueden agregar. Cada uno se silencia por separado.</p></div>' +
+      '<button class="btn" id="go">Crear la ronda</button>' +
+    '</div>';
+  $("#b", s).onclick = () => ir("alta");
+  $("#temas", s).onclick = e => {
+    const b = e.target.closest("[data-t]"); if(!b) return;
+    const t = b.dataset.t, i = sel.indexOf(t);
+    if(i >= 0){ if(sel.length > 1) sel.splice(i,1); else return toast("Una ronda necesita al menos un tema"); }
+    else sel.push(t);
+    b.setAttribute("aria-pressed", sel.indexOf(t) >= 0);
+  };
+  $("#f-r", s).oninput = e => { S.miRonda.nombre = e.target.value; };
+  $("#go", s).onclick = () => {
+    S.miRonda.nombre = ($("#f-r", s).value || "").trim() || "Mi ronda";
+    ir("umbral");
+  };
+}
+
+/* =====================================================================
+   4 · El umbral de cinco
+   ===================================================================== */
+
+const ENTRAN = ["juli","fran","mica","nacho"];
+let timerUmbral = null;
+
+function vUmbral(s){
+  const faltan = Math.max(0, 5 - S.umbral);
+  const listo = faltan === 0;
+  const pct = S.umbral / 5;
+
+  s.innerHTML =
+    '<div class="head"><div class="ttl"><b>' + esc(S.miRonda.nombre) + '</b><small>' +
+      S.miRonda.temas.map(t => "#" + t).join("  ") + '</small></div></div>' +
+    '<div class="scroll pad col g20" style="padding-top:26px;padding-bottom:22px">' +
+      '<div class="ring"><svg width="118" height="118" aria-hidden="true">' +
+        '<circle cx="59" cy="59" r="52" fill="none" stroke="var(--line)" stroke-width="7"></circle>' +
+        '<circle cx="59" cy="59" r="52" fill="none" stroke="' + (listo ? "var(--teal)" : "var(--accent)") + '" stroke-width="7"' +
+        ' stroke-linecap="round" stroke-dasharray="' + (2*Math.PI*52) + '"' +
+        ' stroke-dashoffset="' + (2*Math.PI*52*(1-pct)) + '" style="transition:stroke-dashoffset .45s ease"></circle>' +
+      '</svg><div class="n"><b>' + S.umbral + '</b><small>DE 5</small></div></div>' +
+
+      '<div class="col g6" style="text-align:center">' +
+        (listo
+          ? '<h2>Se abrió tu ronda.</h2><p class="dim">Ya son cinco. Empezá a hablar.</p>'
+          : '<h2>Tu ronda se abre cuando entren 5.</h2><p class="dim">Faltan ' + faltan + '. Pasá el link al grupo del que te querés ir.</p>') +
+      '</div>' +
+
+      '<div class="joins" id="joins"></div>' +
+
+      (listo
+        ? '<button class="btn" id="go">Entrar a la ronda</button>'
+        : '<button class="btn" id="go">Pasar el link</button>' +
+          '<p class="hint" style="text-align:center">Mientras tanto podés escribir: los mensajes quedan esperando.</p>') +
+    '</div>';
+
+  const lista = $("#joins", s);
+  const dentro = ["yo"].concat(ENTRAN.slice(0, S.umbral - 1));
+  lista.innerHTML =
+    dentro.map(p =>
+      '<div class="join">' + avatar(p,"sm") + '<span>' + esc(nombre(p)) +
+      (p === "yo" ? ' <span class="dim3">(vos)</span>' : '') + '</span><span class="tick">entró</span></div>'
+    ).join("") +
+    Array.from({length: Math.max(0, 5 - dentro.length)}, () =>
+      '<div class="slot"><span class="dot"></span><span>esperando…</span></div>'
+    ).join("");
+
+  $("#go", s).onclick = () => {
+    if(listo){ crearMiRonda(); abrirConvo("g:mia", S.miRonda.temas[0]); return; }
+    toast("Link copiado");
+    clearInterval(timerUmbral);
+    timerUmbral = setInterval(() => {
+      S.umbral++;
+      if(S.umbral >= 5){ clearInterval(timerUmbral); S.umbral = 5; }
+      if(S.pantalla === "umbral") pintar(); else clearInterval(timerUmbral);
+    }, 850);
+  };
+}
+
+/* Se crea la ronda del usuario cuando llega a cinco. */
+function crearMiRonda(){
+  if(convos["g:mia"]) return;
+  const temas = {};
+  S.miRonda.temas.forEach((t,i) => {
+    temas[t] = i === 0 ? [
+      {sys:"Entraron Juli, Fran, Mica y Nacho. La ronda está abierta."},
+      {de:"juli",  t:"listo, ya estamos todos acá"},
+      {de:"nacho", t:"esto es mil veces mejor que el otro grupo"},
+      {de:"fran",  t:"che se pueden silenciar los temas de a uno? porque #memes no lo aguanto"}
+    ] : [];
+  });
+  convos["g:mia"] = {
+    tipo:"ronda", titulo:S.miRonda.nombre, miembros:5, efimero:"guarda", hora:hora(),
+    temas:temas, propia:true, gente:["juli","fran","mica","nacho"],
+    cola:["jajaja","dale","+1","yo me prendo"]
+  };
+}
+
+/* =====================================================================
+   5 · Bandeja
+   ===================================================================== */
+
+function ultimo(c){
+  const arr = c.tipo === "ronda" ? (c.temas[temaActivo(c)] || []) : c.msgs;
+  for(let i = arr.length - 1; i >= 0; i--){
+    const m = arr[i];
+    if(m.sys) continue;
+    const txt = m.tipo === "audio" ? "🎤 Audio · " + m.dur : m.t;
+    return { de: m.de, txt: txt };
+  }
+  return { de:null, txt:"Sin mensajes todavía" };
+}
+function temaActivo(c){
+  return (c.ultimoTema && c.temas[c.ultimoTema]) ? c.ultimoTema : Object.keys(c.temas)[0];
+}
+
+function vBandeja(s){
+  crearMiRonda();
+  const orden = ["g:mia","p:juli","g:pibes","p:fran","p:mica"].filter(k => convos[k]);
+  const visibles = orden.filter(k =>
+    S.filtro === "todo" ||
+    (S.filtro === "rondas" && convos[k].tipo === "ronda") ||
+    (S.filtro === "privados" && convos[k].tipo === "priv")
+  );
+
+  s.innerHTML =
+    '<div class="head">' + avatar("yo","sm") +
+      '<div class="ttl"><b>Ronda</b><small>' + esc(S.yo.u) + '</small></div>' +
+      '<button class="chip flat" id="vos" style="padding:6px 12px">Vos</button></div>' +
+    '<div class="filters">' +
+      ['todo','rondas','privados'].map(f =>
+        '<button class="chip flat" data-f="' + f + '" aria-pressed="' + (S.filtro === f) + '">' +
+        f[0].toUpperCase() + f.slice(1) + '</button>'
+      ).join("") +
+    '</div>' +
+    '<div class="scroll" id="lista"></div>';
+
+  $("#vos", s).onclick = () => ir("vos");
+  s.querySelector(".filters").onclick = e => {
+    const b = e.target.closest("[data-f]"); if(!b) return;
+    S.filtro = b.dataset.f; pintar();
+  };
+
+  $("#lista", s).innerHTML = visibles.map(k => {
+    const c = convos[k], u = ultimo(c);
+    const quien = c.tipo === "ronda" && u.de ? (u.de === "yo" ? "Vos: " : nombre(u.de) + ": ") : "";
+    const tema = c.tipo === "ronda" ? '<i>#' + esc(temaActivo(c)) + '</i> · ' : "";
+    const pin = c.tipo === "ronda" ? "ronda" : c.con;
+    return '<button class="row" data-k="' + k + '">' + avatar(pinAv(c, pin)) +
+      '<div class="mid"><div class="top"><b>' + esc(c.titulo) + '</b><time>' + esc(c.hora) + '</time></div>' +
+      '<div class="prev">' + tema + esc(quien + u.txt) + '</div></div>' +
+      (c.nuevos ? '<span class="badge">' + c.nuevos + '</span>' : '') + '</button>';
+  }).join("");
+
+  $("#lista", s).onclick = e => {
+    const b = e.target.closest("[data-k]"); if(!b) return;
+    abrirConvo(b.dataset.k);
+  };
+}
+/* Las rondas toman color del largo de su nombre; los privados, el de la persona. */
+function pinAv(c, quien){
+  if(c.tipo === "priv") return quien;
+  return { n: c.titulo, c: c.titulo.length };
+}
+
+/* =====================================================================
+   6 · Abrir conversación
+   ===================================================================== */
+
+function abrirConvo(k, tema){
+  S.convo = k;
+  const c = convos[k];
+  c.nuevos = 0;
+  if(c.tipo === "ronda"){
+    S.tema = tema || temaActivo(c);
+    ir("ronda_v");
+  } else {
+    S.tema = null;
+    ir("chat");
+  }
+}
+
+function vRondaVista(s){ vConversacion(s, true); }
+function vChat(s){ vConversacion(s, false); }
+
+function vConversacion(s, esRonda){
+  const c = convos[S.convo];
+  const sub = esRonda ? c.miembros + " en la ronda" : c.sub;
+
+  s.innerHTML =
+    '<div class="head"><button class="back" id="b">‹</button>' +
+      avatar(esRonda ? pinAv(c) : c.con, "sm") +
+      '<div class="ttl"><b>' + esc(c.titulo) + '</b><small>' + esc(sub) + '</small></div></div>' +
+    (esRonda ? '<div class="temas" id="temas" role="tablist">' +
+      Object.keys(c.temas).map(t =>
+        '<button class="tema" role="tab" data-t="' + esc(t) + '" aria-selected="' + (t === S.tema) + '">#' + esc(t) +
+        (c.sinLeer && c.sinLeer[t] ? '<em></em>' : '') + '</button>'
+      ).join("") +
+      '<button class="tema" data-t="__nuevo" style="color:var(--teal)">+ tema</button></div>' : "") +
+    '<div class="efim"><span class="lbl">Los mensajes</span>' +
+      efimBtn(c,"guarda","Se guardan") + efimBtn(c,"24h","24 h") + efimBtn(c,"al-leer","Al leer") +
+    '</div>' +
+    '<div class="scroll" id="scr"><div class="msgs" id="msgs"></div></div>' +
+    '<div class="compose"><div class="box">' +
+      '<input id="txt" placeholder="Escribí algo…" autocomplete="off">' +
+    '</div><button class="send" id="send" aria-label="Enviar">↑</button></div>';
+
+  $("#b", s).onclick = () => ir("bandeja");
+
+  if(esRonda){
+    $("#temas", s).onclick = e => {
+      const b = e.target.closest("[data-t]"); if(!b) return;
+      if(b.dataset.t === "__nuevo"){
+        const n = prompt("Nombre del tema nuevo (sin #):", "");
+        if(n){
+          const clave = n.trim().toLowerCase().replace(/[^a-z0-9áéíóúñ]/gi,"").slice(0,14);
+          if(clave && !c.temas[clave]){
+            c.temas[clave] = [{sys:"Creaste el tema #" + clave + "."}];
+            S.tema = clave; pintar();
+          }
+        }
+        return;
+      }
+      if(c.sinLeer) delete c.sinLeer[b.dataset.t];
+      S.tema = b.dataset.t; pintar();
+    };
+  }
+
+  s.querySelector(".efim").onclick = e => {
+    const b = e.target.closest("[data-e]"); if(!b) return;
+    if(c.efimero === b.dataset.e) return;
+    c.efimero = b.dataset.e;
+    const txt = { "guarda":"se guardan", "24h":"se borran a las 24 horas", "al-leer":"se borran al leer" }[c.efimero];
+    listaMsgs(c).push({sys: S.yo.n + " puso que los mensajes " + txt + "."});
+    pintar(); alFinal();
+  };
+
+  const enviar = () => {
+    const i = $("#txt", s), v = i.value.trim();
+    if(!v) return;
+    i.value = "";
+    listaMsgs(c).push({de:"yo", t:v, hora:hora()});
+    c.hora = hora();
+    if(c.tipo === "ronda") c.ultimoTema = S.tema;
+    render(); alFinal();
+    responder(c);
+  };
+  $("#send", s).onclick = enviar;
+  $("#txt", s).addEventListener("keydown", e => { if(e.key === "Enter") enviar(); });
+
+  render();
+  alFinal();
+
+  function render(){ pintarMsgs($("#msgs", s), c); }
+}
+
+function efimBtn(c, v, lbl){
+  return '<button data-e="' + v + '" aria-pressed="' + (c.efimero === v) + '">' + lbl + '</button>';
+}
+function listaMsgs(c){
+  return c.tipo === "ronda" ? c.temas[S.tema] : c.msgs;
+}
+function alFinal(){
+  const sc = $("#scr"); if(sc) sc.scrollTop = sc.scrollHeight;
+}
+
+/* Respuesta con guion: la cola da la sensación de conversación viva
+   sin backend. Cuando se termina, cicla. */
+function responder(c){
+  if(!c.cola || !c.cola.length) return;
+  const arr = listaMsgs(c);
+  const tema = S.tema;
+  const gente = c.gente || ["juli"];
+  const quien = c.tipo === "priv" ? c.con : gente[Math.floor(Math.random()*gente.length)];
+  const txt = c.cola.shift();
+  c.cola.push(txt);
+  setTimeout(() => {
+    arr.push({de:quien, t:txt, hora:hora()});
+    c.hora = hora();
+    if(c.tipo === "ronda") c.ultimoTema = tema;
+    if((S.pantalla === "chat" || S.pantalla === "ronda_v") && S.convo === laClave(c)){
+      const cont = $("#msgs"); if(cont){ pintarMsgs(cont, c); alFinal(); }
+    } else {
+      c.nuevos = (c.nuevos || 0) + 1;
+      if(c.tipo === "ronda"){ c.sinLeer = c.sinLeer || {}; c.sinLeer[tema] = true; }
+    }
+  }, 700 + Math.random()*700);
+}
+
+/* =====================================================================
+   Mensajes
+   ===================================================================== */
+
+function laClave(c){
+  return Object.keys(convos).filter(k => convos[k] === c)[0] || null;
+}
+
+function pintarMsgs(cont, c){
+  const arr = listaMsgs(c) || [];
+  let prev = null;
+  cont.innerHTML = arr.map((m, i) => {
+    if(m.sys){ prev = null; return '<div class="sys">' + esc(m.sys) + '</div>'; }
+    const mio = m.de === "yo";
+    const start = prev !== m.de;
+    prev = m.de;
+    const cls = "msg" + (mio ? " me" : "") + (start ? " start" : "");
+    const who = (!mio && c.tipo === "ronda" && start)
+      ? '<span class="who" style="color:' + color(m.de) + '">' + esc(nombre(m.de)) + '</span>' : "";
+    const reacts = m.react
+      ? '<div class="reacts">' + Object.keys(m.react).map(e =>
+          '<span>' + e + " " + m.react[e] + '</span>').join("") + '</div>'
+      : "";
+    return '<div class="' + cls + '" data-i="' + i + '">' + who + cuerpo(m, i) + reacts + '</div>';
+  }).join("");
+
+  cont.onclick = e => {
+    const cue = e.target.closest(".cue");
+    if(cue){ saltarAudio(cue); return; }
+    const btn = e.target.closest("[data-acc]");
+    if(btn){ accionAudio(btn, arr); return; }
+    const msg = e.target.closest(".msg");
+    if(msg) barraReacciones(msg, arr[+msg.dataset.i], c);
+  };
+}
+
+function cuerpo(m, i){
+  const t = '<span class="t">' + esc(m.hora || "14:3" + (i % 9)) + '</span>';
+  if(m.tipo === "audio"){
+    return '<div class="bub">' +
+      '<div class="audio">' +
+        '<button class="play" data-acc="play" data-i="' + i + '" aria-label="Reproducir">▶</button>' +
+        '<div class="wave">' + Array.from({length:26}, (_,k) =>
+          '<i style="height:' + (22 + Math.sin(k*1.7)*14 + (k%4)*7) + '%"></i>').join("") + '</div>' +
+        '<span class="dim3" style="font-size:11.5px;color:inherit;opacity:.6">' + esc(m.dur) + '</span>' +
+        '<button class="spd" data-acc="spd">1×</button>' +
+      '</div>' +
+      '<button class="tr-btn" data-acc="tr">▾ Ver transcripción</button>' +
+      '<div class="tr" hidden>' + m.tr.split(" ").map(w =>
+        '<span class="cue">' + esc(w) + '</span>').join(" ") + '</div>' +
+    '</div>';
+  }
+  const cita = m.cita
+    ? '<div class="quote"><b>' + esc(m.cita.de) + '</b>' + esc(m.cita.t) + '</div>' : "";
+  return '<div class="bub">' + cita + esc(m.t) + t + '</div>';
+}
+
+/* --- audio simulado --- */
+const reproduciendo = new WeakMap();
+
+function accionAudio(btn, arr){
+  const bub = btn.closest(".bub");
+  if(btn.dataset.acc === "tr"){
+    const tr = bub.querySelector(".tr");
+    tr.hidden = !tr.hidden;
+    btn.textContent = (tr.hidden ? "▾ Ver" : "▴ Ocultar") + " transcripción";
+    return;
+  }
+  if(btn.dataset.acc === "spd"){
+    const s = { "1×":"1,5×", "1,5×":"2×", "2×":"1×" };
+    btn.textContent = s[btn.textContent] || "1×";
+    return;
+  }
+  // play / pausa
+  const barras = bub.querySelectorAll(".wave i");
+  const activo = reproduciendo.get(bub);
+  if(activo){
+    clearInterval(activo); reproduciendo.delete(bub);
+    btn.textContent = "▶";
+    return;
+  }
+  btn.textContent = "❚❚";
+  const vel = { "1×":1, "1,5×":1.5, "2×":2 }[bub.querySelector(".spd").textContent] || 1;
+  let k = 0;
+  const id = setInterval(() => {
+    barras.forEach((b, j) => b.classList.toggle("on", j <= k));
+    k++;
+    if(k > barras.length){
+      clearInterval(id); reproduciendo.delete(bub);
+      btn.textContent = "▶";
+      barras.forEach(b => b.classList.remove("on"));
+    }
+  }, 150 / vel);
+  reproduciendo.set(bub, id);
+}
+
+/* Tocar una palabra de la transcripción salta el audio a esa parte:
+   es el motivo por el que la transcripción no es sólo un texto al lado. */
+function saltarAudio(cue){
+  const bub = cue.closest(".bub");
+  const palabras = Array.from(bub.querySelectorAll(".cue"));
+  const barras = bub.querySelectorAll(".wave i");
+  const pos = Math.floor(palabras.indexOf(cue) / palabras.length * barras.length);
+  barras.forEach((b, j) => b.classList.toggle("on", j <= pos));
+  toast("Salta a esa parte del audio");
+}
+
+/* --- reacciones --- */
+function barraReacciones(msgEl, m, c){
+  if(!m || m.sys) return;
+  const vieja = $(".rbar"); if(vieja){ vieja.remove(); if(vieja.dataset.i === msgEl.dataset.i) return; }
+  const bar = document.createElement("div");
+  bar.className = "rbar"; bar.dataset.i = msgEl.dataset.i;
+  bar.innerHTML = ["😂","🔥","❤️","😭","👍"].map(e =>
+    '<button data-e="' + e + '">' + e + '</button>').join("");
+  const d = dev().getBoundingClientRect(), r = msgEl.getBoundingClientRect();
+  bar.style.top = Math.max(8, r.top - d.top - 46) + "px";
+  bar.style.left = Math.min(Math.max(8, r.left - d.left), d.width - 190) + "px";
+  dev().appendChild(bar);
+  bar.onclick = e => {
+    const b = e.target.closest("[data-e]"); if(!b) return;
+    m.react = m.react || {};
+    m.react[b.dataset.e] = (m.react[b.dataset.e] || 0) + 1;
+    bar.remove();
+    pintarMsgs($("#msgs"), c);
+  };
+  setTimeout(() => {
+    document.addEventListener("click", function fuera(ev){
+      if(!bar.contains(ev.target)){ bar.remove(); document.removeEventListener("click", fuera); }
+    });
+  }, 0);
+}
+
+/* =====================================================================
+   7 · Vos — privacidad y lo que exigen las tiendas
+   ===================================================================== */
+
+function vVos(s){
+  s.innerHTML =
+    '<div class="head"><button class="back" id="b">‹</button><div class="ttl"><b>Vos</b></div></div>' +
+    '<div class="scroll">' +
+      '<div class="col g10" style="align-items:center;padding:26px 20px 22px">' +
+        '<div class="av" style="width:74px;height:74px;border-radius:26px;font-size:28px;background:' + color("yo") + '">' +
+          esc(S.yo.n.slice(0,1).toUpperCase()) + '</div>' +
+        '<div class="col g6" style="align-items:center">' +
+          '<h2>' + esc(S.yo.n) + '</h2>' +
+          '<span class="mono" style="color:var(--teal)">' + esc(S.yo.u) + '</span>' +
+        '</div>' +
+        '<p class="hint" style="text-align:center;max-width:30ch">Nadie te puede buscar por nombre. Te encuentran si les diste tu @ o el link de tu ronda.</p>' +
+      '</div>' +
+
+      seccion("Privacidad") +
+      fila("Tilde de leído", "Si lo apagás, dejás de ver el de los demás. Va para los dos lados.", "leido", S.leido) +
+      fila("Mostrar “escribiendo…”", "Apagado. Si lo prendés, lo ves y te ven.", "escribiendo", S.escribiendo) +
+      fila("Teléfono", "No cargado. Es opcional y sirve sólo para recuperar la cuenta.") +
+      '<div style="padding:12px 16px"><p class="hint">No existe “en línea” ni “últ. vez” en Ronda. No están apagados: no están.</p></div>' +
+
+      seccion("Seguridad") +
+      fila("Bloqueados", "Ninguno todavía.") +
+      fila("Reportar a alguien", "Lo lee una persona. Respuesta en menos de 24 horas.") +
+
+      seccion("Tus datos") +
+      fila("Exportar todo", "Contactos, conversaciones e historial, en formato abierto.") +
+      '<button class="set warn" id="borrar"><div class="mid"><b>Borrar mi cuenta</b>' +
+        '<small>Desde acá, sin mandar un mail ni hablar con nadie.</small></div></button>' +
+
+      '<p class="hint" style="padding:18px 16px 26px">Ronda es para mayores de 16. Hoy hay cifrado en tránsito y en reposo, no de punta a punta: eso llega en la Fase 4 y hasta entonces no lo decimos.</p>' +
+    '</div>';
+
+  $("#b", s).onclick = () => ir("bandeja");
+  s.querySelectorAll("[data-sw]").forEach(el => {
+    const alternar = () => { S[el.dataset.sw] = !S[el.dataset.sw]; pintar(); };
+    el.onclick = alternar;
+    el.onkeydown = e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); alternar(); } };
+  });
+  $("#borrar", s).onclick = () => toast("En la app de verdad: se borra y se acabó");
+}
+function seccion(t){
+  return '<div class="mono" style="padding:20px 16px 8px;color:var(--ink-3)">' + esc(t) + '</div>';
+}
+/* Con `clave` la fila es un interruptor sobre S[clave]; sin ella, un ítem. */
+function fila(b, sm, clave, on){
+  const ctrl = clave
+    ? '<span class="sw" data-sw="' + clave + '" role="button" tabindex="0" aria-pressed="' + !!on + '"></span>'
+    : '<span class="dim3" style="font-size:18px">›</span>';
+  return '<div class="set"><div class="mid"><b>' + esc(b) + '</b><small>' + esc(sm) + '</small></div>' + ctrl + '</div>';
+}
+
+/* =====================================================================
+   Arranque
+   ===================================================================== */
+
+document.getElementById("btn-notes").onclick = () => {
+  S.notas = !S.notas; sincNotas(); pintarNotas();
+};
+document.getElementById("btn-reset").onclick = () => {
+  clearInterval(timerUmbral);
+  const n = S.notas;
+  estadoInicial(); S.notas = n; sincNotas(); pintar();
+};
+
+estadoInicial();
+pintar();
+</script>
+</body>
+</html>

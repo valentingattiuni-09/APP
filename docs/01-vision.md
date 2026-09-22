@@ -1,309 +1,333 @@
 # Ronda — Documento fundacional
 
-> **Estado:** borrador 1 · Septiembre 2026
+> **Estado:** borrador 2 · Septiembre 2026 · **pivot**
 > **Nombre de trabajo:** Ronda (la ronda de mate: el círculo donde se pasa la palabra)
-> **Qué es este documento:** el horizonte. Qué problema resolvemos, por qué podemos ganar, y en qué orden se construye. Antes de escribir código.
+> **Qué cambió respecto del borrador 1:** la cuña ya no son los comercios. Son los jóvenes. El borrador 1 entraba por quien paga; este entra por quien se muda. El razonamiento completo está en la sección 3.
 
 ---
 
 ## 1. Resumen ejecutivo
 
-Argentina tiene entre **92% y 99% de penetración de WhatsApp** — de las más altas del mundo. El argentino promedio le dedica **29 horas por mes**, contra un promedio global de 17. WhatsApp dejó de ser una app: es infraestructura. Se usa para vender, para coordinar el trabajo, para el consorcio, para la escuela, para el turno del médico.
+Argentina tiene entre **92% y 99% de penetración de WhatsApp**, y el argentino promedio le dedica **29 horas por mes** contra 17 del promedio global. WhatsApp no es una app: es infraestructura.
 
-**Eso significa dos cosas, y hay que decir las dos:**
+Contra esa infraestructura hay una sola grieta, y es de edad.
 
-1. Intentar reemplazar a WhatsApp con "un WhatsApp mejor" es perder. No se pierde por producto: se pierde por efecto red. Nadie se muda solo a una app vacía.
-2. Pero esa misma dependencia total creó un problema real y creciente: **miles de negocios argentinos tienen su canal de ventas alquilado a Meta, y Meta se lo puede cerrar mañana.**
+**WhatsApp se volvió la app de los adultos.** Es donde está el grupo de la familia, el del consorcio, el del trabajo, el de las madres del colegio. Para una persona de 25 años eso es una agenda. Para una de 17 es un lugar del que se quiere ir. La conversación entre jóvenes argentinos ya se está yendo a otro lado — a los DM de Instagram, a Discord, a Telegram — sin que nadie haya construido un producto pensado para ese éxodo.
 
-Ronda no arranca peleando por el chat con los amigos. Arranca por donde duele y hay plata: **le damos a los negocios argentinos un canal de mensajería propio, que nadie les puede dar de baja, y por el que sus clientes eligen entrar.**
+**Ronda es la app de mensajería de los que ya no quieren estar donde está su vieja.**
 
-Los negocios traen a sus clientes. Los clientes, ya adentro, descubren que también pueden hablar entre ellos. Así se rompe el arranque en frío: no pidiéndole a la gente que se mude, sino dándole una razón para instalar.
+No peleamos por reemplazar WhatsApp para todo el país. Peleamos por ser donde ocurre la conversación de los menores de 25 años, que es el único segmento que en la historia de la mensajería se mudó de verdad, y que arrastra al resto en los diez años siguientes.
 
 ---
 
 ## 2. El problema real
 
-### 2.1 Lo que le pasa hoy a un negocio argentino
+### 2.1 Por qué el joven argentino está incómodo en WhatsApp
 
-Una PyME que vende por WhatsApp vive así:
+Esto no es "WhatsApp está viejo". Son seis dolores concretos y verificables:
 
-- **La cuenta se cae sin aviso.** Enviar más de 20–30 mensajes por día desde la app de WhatsApp Business puede marcarse como actividad masiva. Si el sistema detecta volumen alto hacia números desconocidos, suspende o banea. No hay preaviso, no hay teléfono al que llamar.
-- **Apelar es una lotería.** El "solicitar revisión" aparece a veces sí y a veces no. La respuesta puede tardar días o no llegar.
-- **Se cae la cuenta, se cae la base de clientes.** Los contactos, el historial, las conversaciones abiertas, los pedidos a medio cerrar: todo estaba ahí adentro. No hay exportación útil.
-- **Y encima ahora se paga por mensaje.** Desde mediados de 2025, Meta cobra por mensaje en las plantillas de marketing y utilidad. Cada envío que rebota, que no se lee o que el usuario bloquea tiene costo directo.
-
-El negocio no es dueño de su canal. Es inquilino sin contrato.
-
-### 2.2 Lo que le pasa al usuario
-
-Del otro lado, la persona común recibe cada vez más mensajes comerciales que no pidió, sin forma clara de cortarlos salvo bloquear uno por uno. La bandeja de entrada más íntima que tiene — la misma donde le escribe la madre — se le llenó de promociones.
-
-**Los dos problemas son el mismo problema:** no existe un canal donde el negocio pueda hablarle a su cliente con reglas claras y el cliente tenga el control real de la puerta.
-
----
-
-## 3. Por qué el ataque frontal no funciona (y hay que asumirlo)
-
-Conviene decirlo sin vueltas, porque define toda la estrategia:
-
-| Obstáculo | Por qué duele |
+| Dolor | Qué pasa exactamente |
 |---|---|
-| **Efecto red** | Una app de mensajería vale lo que vale su lista de contactos. Con 99% de penetración, WhatsApp ya tiene a todos. Ronda con 500 usuarios no le sirve a nadie, por bien hecha que esté. |
-| **Costo de migración colectiva** | Nadie se muda solo. Haría falta que se mude tu grupo, tu familia, tu laburo y tu consorcio a la vez. Eso no pasa por publicidad. |
-| **No hay obligación de interoperar** | En Europa la DMA obliga a Meta a abrir WhatsApp a terceros. En Argentina no existe esa obligación. No podemos conectarnos a WhatsApp: hay que traer gente de verdad. |
-| **Los que ya lo intentaron** | Telegram y Signal tienen años, plata y producto excelente. En Argentina siguen siendo minoritarios. Mejor producto no alcanzó. |
+| **Es la app de la familia** | Tu vieja, tu tía, el grupo del curso con las madres, el grupo del club con los padres. No hay separación entre tu vida social y tu vida familiar: viven en la misma bandeja, con el mismo tono de notificación. |
+| **Tu número es tu identidad** | Para hablar con alguien nuevo tenés que darle el teléfono. Eso es darle la llave: que te agende, que te agregue a grupos, que te pase a otro, que te busque. Instagram ganó el DM juvenil por una sola razón de producto: ahí sos un `@`, no un número. |
+| **Todo queda para siempre** | El mensaje de hace dos años sigue ahí, buscable, capturable. Nadie de 18 quiere un archivo permanente de todo lo que dijo a los 15. |
+| **La presión del "en línea" y el tilde azul** | "Últ. vez", "en línea", "escribiendo…", doble tilde azul. Es un panóptico social entre amigos y entre parejas. WhatsApp lo hizo configurable a medias y tarde. |
+| **Los grupos son un pozo** | Cualquiera te agrega. 400 mensajes sin leer. No hay temas, no hay hilos, no hay forma de seguir una sola conversación. Discord resolvió esto hace diez años y WhatsApp sigue sin copiarlo. |
+| **Es gris** | Los jóvenes hablan con stickers, reacciones, memes y audios. WhatsApp es funcional y visualmente mudo. Los estados siguen siendo los de 2014. |
 
-**Conclusión:** no competimos por "ser la app donde chateás con tus amigos". Todavía no. Competimos por **ser el canal donde los negocios te escriben**, que es un mercado donde WhatsApp es caro, arbitrario y odiado por sus propios usuarios pagos.
+### 2.2 El dolor que nadie nombra pero todos sufren
 
----
+**El audio de siete minutos.** No hay transcripción, no hay forma de saltar a la parte que importa, no hay velocidad decente. Es la queja número uno de la mensajería argentina y es, además, un problema técnico perfectamente resoluble. Lo listamos aparte porque es el tipo de cosa que hace que alguien abra la app nueva aunque el grupo siga en la vieja.
 
-## 4. La cuña: por dónde sí se entra
+### 2.3 Lo que esto significa
 
-> **El que paga es el negocio. El que manda es el usuario. El que crece es Ronda.**
-
-La secuencia:
-
-**Paso 1 — Traemos negocios.** Le vendemos a comercios, PyMEs y profesionales argentinos un canal de mensajería propio: número verificado, sin riesgo de baneo arbitrario, con precio en pesos y previsible, y con sus contactos exportables siempre.
-
-**Paso 2 — Los negocios traen a sus clientes.** Cada comercio tiene un QR en el mostrador, un link en Instagram, un botón en su web: *"Seguinos por Ronda y enterate de las ofertas primero."* El cliente instala porque quiere algo concreto — el turno, el pedido, el descuento — no porque quiera cambiar de app de chat.
-
-**Paso 3 — Los clientes se encuentran adentro.** Cuando alguien ya tiene la app instalada y ve que tres contactos suyos también la tienen, mandar un mensaje personal deja de tener fricción. El chat entre personas crece **gratis**, encima de una base que ya se instaló por otro motivo.
-
-**Paso 4 — Recién ahí somos una app de mensajería.** Grupos, llamadas, estados. Con una base instalada real, no con una app vacía pidiendo que alguien la estrene.
-
-Este es el mismo camino que usaron Mercado Pago (entró por el cobro del vendedor, terminó en la billetera de todos) y Rappi. **No se le pide al usuario que cambie de hábito: se le da algo que quiere, del otro lado.**
+No hay un producto de mensajería diseñado para alguien de 16 a 24 años. Hay productos de mensajería para todos (WhatsApp, Telegram), productos sociales que sirven de mensajería por accidente (Instagram, TikTok) y productos de nicho gamer (Discord). **El lugar está vacío y lo está ocupando por default el DM de Instagram, que es un mal mensajero: sin backup, sin archivos, sin llamadas decentes, y con un algoritmo mirando todo.**
 
 ---
 
-## 5. Qué es Ronda
+## 3. Por qué los jóvenes y no los comercios
 
-**Ronda es la app de mensajería argentina donde tu negocio es dueño de su canal y vos sos dueño de tu bandeja.**
+El borrador 1 de este documento entraba por los comercios: venderles un canal propio para que no dependan de Meta. La idea de negocio era mejor; la idea de crecimiento era peor. Vale la pena dejar escrito por qué se cambió, para no volver atrás por nostalgia.
 
-Tres superficies en una sola app:
-
-### 🗨️ Ronda Personal (gratis, siempre)
-Chat 1 a 1 y grupos. Texto, voz, fotos, videos, documentos, ubicación. Lo que esperás de un mensajero, funcionando bien en redes argentinas malas y en teléfonos viejos.
-
-### 🏪 Ronda Negocios (pago)
-Perfil verificado del comercio, catálogo, respuestas automáticas, múltiples operadores sobre el mismo número, etiquetas de clientes, métricas. **Y la garantía central: tu cuenta no se da de baja por un algoritmo. Si hay un problema, hay un humano argentino que te atiende y un proceso con plazos escritos.**
-
-### 🔔 Ronda Canales (gratis para el usuario)
-El usuario se suscribe a los comercios que quiere. Un switch por comercio. Un botón de "no me escribas más" que funciona de verdad y al instante. Los mensajes comerciales viven en una pestaña separada — **nunca mezclados con los chats personales.**
-
----
-
-## 6. Los cuatro diferenciales
-
-Estos son los únicos cuatro lugares donde le podemos ganar a WhatsApp. Todo lo demás es paridad.
-
-### 1. **No te bajamos la cuenta por un algoritmo**
-Es la promesa central y es contra el dolor exacto que motivó este proyecto. Reglas publicadas, avisos antes de suspender, apelación con plazo máximo de respuesta, y un humano del otro lado. Meta no puede ofrecer esto: opera a escala planetaria y por eso automatiza todo.
-
-### 2. **Los datos son tuyos y se los podés llevar**
-Exportación completa de contactos, conversaciones e historial, en cualquier momento, en un formato abierto. Suena a que nos juega en contra — es lo contrario: es la razón por la que un negocio que ya se quemó una vez nos va a confiar su canal.
-
-### 3. **Argentino de verdad, no traducido**
-Precios en pesos, factura A/B/C, integración con Mercado Pago y con AFIP/ARCA, soporte en horario argentino, en castellano rioplatense, con gente que entiende qué es un monotributista. Funcionamiento bueno con poca señal y en gama baja: la mitad del país no tiene el último iPhone.
-
-### 4. **El usuario tiene el control real de la puerta**
-Opt-in explícito por comercio. Bandeja comercial separada de la personal. Baja en un toque. **Esto no es un gesto de buena onda: es la única forma de que Ronda no se convierta en un basural de spam en seis meses** — que es exactamente lo que la mataría.
-
----
-
-## 7. El principio innegociable
-
-> **A nadie se le escribe sin que lo haya pedido.**
-
-Hay que ser muy claro con esto, porque es la tentación obvia del proyecto: *"WhatsApp me banea por mandar masivo, hagamos una app donde pueda mandar masivo."*
-
-Ese camino termina en un solo lugar. Una app de mensajería sin control de consentimiento se llena de spam, los usuarios la desinstalan, Apple y Google la sacan de las tiendas por abuso, y las operadoras la bloquean. No es una opinión moral: es la causa de muerte más común de este tipo de productos.
-
-**Lo que Ronda arregla no es el límite. Es la arbitrariedad.**
-
-| WhatsApp hoy | Ronda |
-|---|---|
-| Límites secretos que nadie te dice | Límites publicados y claros |
-| Te banean sin aviso | Te avisamos antes, con la razón |
-| Apelación sin plazo ni respuesta | Apelación con plazo máximo y un humano |
-| Pagás por mensaje, incluso los que rebotan | Abono previsible en pesos |
-| Si te caen, perdés todo | Exportás tus datos cuando quieras |
-
-Un negocio que le escribe a 5.000 clientes que **pidieron** recibirlo es un buen cliente nuestro, y lo vamos a defender. Un negocio que compra una base de números y dispara a ciegas nos hunde el producto, y no lo queremos.
-
----
-
-## 8. Modelo de negocio
-
-**Gratis para siempre para las personas.** Sin publicidad y sin vender datos. El usuario no es el producto: el usuario es la red que hace valioso el canal.
-
-**El negocio paga por abono mensual en pesos**, por tramo de volumen. Sin cargo por mensaje: el negocio necesita saber cuánto le sale el mes, no rezarle a un contador de envíos.
-
-| Plan | Para quién | Incluye |
+| | Cuña por comercios (borrador 1) | Cuña por jóvenes (este borrador) |
 |---|---|---|
-| **Mostrador** | Comercio chico, profesional independiente | 1 número, 1 operador, hasta N suscriptores, catálogo básico |
-| **Local** | PyME con equipo de atención | Varios operadores, etiquetas, respuestas automáticas, métricas |
-| **Cadena** | Empresa con varias sucursales | Multi-sucursal, API, integraciones, soporte prioritario |
+| **Quién se muda** | Nadie. El cliente instala para recibir una oferta y desinstala. | Un grupo entero de amigos, que ya quiere irse. |
+| **Ingresos** | Inmediatos y claros. | Cero al principio. |
+| **Efecto red** | No se construye: son relaciones comercio→cliente, no persona↔persona. | Se construye solo: la conversación entre pares *es* la red. |
+| **Riesgo de terminar en otra cosa** | Alto. Termina siendo una herramienta de marketing con chat, no una app de mensajería. | Bajo. Si funciona, es literalmente una app de mensajería. |
+| **Precedente histórico** | Ninguna app de mensajería masiva nació así. | Todas nacieron así. |
 
-*(Los números finos de cada plan se definen después de hablar con 20 comercios reales — ver Fase 0.)*
+**El argumento decisivo es el último.** Snapchat le ganó a Facebook Messenger entre adolescentes estadounidenses sin ser mejor mensajero: fue mejor *para lo que un adolescente quería* — efímero, sin padres, sin archivo permanente. Discord le ganó a Skype en gaming. Instagram le ganó el DM a WhatsApp en la secundaria argentina sin proponérselo. **Ninguna app de mensajería importante creció de arriba hacia abajo.** El contagio va del hijo al padre, nunca al revés.
 
-**Ingresos secundarios, más adelante:** cobros dentro del chat (comisión por transacción), API para integradores y agencias.
+### 3.1 El error que hay que evitar: pensar en usuarios en vez de en grupos
+
+Este es el corazón de la estrategia y está en la sección 5 completo, pero va acá porque reencuadra todo lo demás:
+
+> **La unidad de migración no es la persona. Es el grupo.**
+
+Nadie se muda solo a una app de mensajería, y no hace falta que se mude el país: hace falta que se mude **un curso, un equipo, una banda de seis amigos**. Eso sí pasa, pasa en una semana, y pasa sin publicidad si el producto es claramente mejor *para ese grupo*.
+
+Toda decisión de producto de Ronda se evalúa contra una sola pregunta: **¿esto hace más probable que un grupo entero se mude junto?** Lo que no mueve esa aguja, no entra en la Fase 1.
+
+### 3.2 Qué pasa con los comercios
+
+No se tiran. Se corren de lugar: **dejan de ser la cuña y pasan a ser la monetización**, en la Fase 3. Cuando haya una base joven real y densa, el canal de comercios vale mucho más de lo que valía como punto de partida — porque tiene atrás una audiencia que Meta le cobra carísimo alcanzar. Todo el trabajo del borrador 1 sobre el modelo de negocio, los planes y la promesa de "no te bajamos la cuenta por un algoritmo" sigue vigente; sólo cambia cuándo.
 
 ---
 
-## 9. Roadmap
+## 4. Qué es Ronda
 
-### Fase 0 — Validación (4 semanas, sin código de producto)
-Lo más importante del proyecto y lo que casi nadie hace.
+**Ronda es la app donde hablás con tu gente, sin tu familia adentro y sin dar tu número.**
 
-- Hablar con **20 comercios argentinos** que hayan tenido problemas con WhatsApp Business. Confirmar el dolor, medir cuánto pagarían.
-- Landing con pre-registro. Medir conversión real, no intención declarada.
-- Verificar disponibilidad de la marca "Ronda" en INPI y del dominio.
-- **Criterio de salida:** si de 20 comercios menos de 8 dicen que pagarían y dejan la tarjeta o una seña, se replantea el producto. No se sigue por inercia.
+Cinco decisiones de producto la definen. Cada una ataca uno de los dolores de la sección 2, y cada una es algo que WhatsApp **no puede copiar sin romperse**, porque su base instalada de mil millones de adultos depende de lo contrario.
 
-### Fase 1 — MVP de mensajería (8–10 semanas)
-- Registro con número de teléfono + código por SMS
-- Chats 1 a 1 en tiempo real, con estados de entregado y leído
-- Grupos básicos
-- Fotos, audios y archivos
+### 1. Sos un `@`, no un número
+
+Te registrás con un usuario. El teléfono es opcional y sirve sólo para recuperar la cuenta. Podés hablar con alguien sin darle tu número, y podés cortar sin que te quede agendado de por vida.
+
+> **Consecuencia técnica enorme:** sin SMS obligatorio, el costo por usuario nuevo se desploma. El SMS de verificación era el rubro que se comía el presupuesto al escalar. Esta decisión de producto es también la decisión de costos más importante del proyecto.
+
+### 2. Rondas: grupos con temas
+
+Un grupo en Ronda no es una lista plana de mensajes. Es una **ronda** con temas adentro: `#general`, `#salidas`, `#parcial`, `#memes`. Discord en un teléfono, para gente que no juega. Resuelve el pozo de 400 mensajes sin leer, que es la razón número uno por la que los grupos grandes se vuelven inservibles.
+
+Y: **a nadie se lo agrega sin que acepte.** Se invita, se acepta. Siempre.
+
+### 3. Lo efímero es una opción de primera clase
+
+Por chat y por ronda se elige: se guarda todo, se borra a las 24 horas, se borra al leer. Aviso de captura de pantalla. No es "modo secreto escondido en un submenú": es una perilla visible arriba de cada conversación.
+
+### 4. Nada de presión social por default
+
+Sin "en línea". Sin "últ. vez". Sin "escribiendo…" salvo que vos lo prendas. El tilde de leído es simétrico: si lo apagás, dejás de ver el de los demás. **No hay forma de mirar sin ser visto** — que es exactamente lo que hoy convierte a WhatsApp en un aparato de vigilancia entre adolescentes.
+
+### 5. Audios que se pueden escuchar
+
+Transcripción automática, velocidad 1×/1,5×/2×, forma de onda para saltar, y reanudar donde lo dejaste. El audio de siete minutos deja de ser una condena.
+
+### Y además, lo que se da por hecho
+
+Chats 1 a 1 y grupales, fotos, videos, archivos, ubicación, reacciones, stickers, responder citando, buscar. **Funcionando bien en redes argentinas malas y en teléfonos de gama baja**, que no es un detalle: es la mitad del mercado.
+
+---
+
+## 5. Cómo se rompe el arranque en frío
+
+Es el único problema que importa. Una app de mensajería vacía no vale nada, por bien hecha que esté. Cuatro mecanismos, en orden de importancia:
+
+### 5.1 El producto se diseña para que entre un grupo, no una persona
+
+El onboarding no es "creá tu cuenta y buscá amigos". Es **"creá tu ronda y pasá el link"**. El primer usuario elige nombre de ronda, elige temas, y sale con un link para mandar al grupo de WhatsApp que quiere abandonar.
+
+**La ronda se abre cuando entran cinco.** Antes de eso la app te lo dice de frente: "faltan 3". Esto es deliberado y contraintuitivo — estamos poniendo una traba a la activación:
+
+- El que llega solo y ve una app vacía se va y no vuelve. Ese usuario está perdido igual; mejor no gastarlo.
+- El que llega con cuatro más tiene una app que funciona desde el primer minuto.
+- Y el umbral convierte al primer usuario en **reclutador**: le dimos una tarea concreta y un contador.
+
+> **La app tiene que ser inútil sola y valiosa a los cinco.** Si un usuario solo puede sacarle provecho, deja de haber presión para traer al grupo, y sin esa presión no hay migración.
+
+### 5.2 Densidad antes que alcance
+
+No se lanza "en Argentina". Se lanza en **una facultad**. Después en otra. Después en un colegio.
+
+La métrica de lanzamiento no es descargas: es **qué porcentaje de un círculo cerrado está adentro**. Sesenta personas que son el 80% de una carrera valen infinitamente más que 5.000 desparramadas por el país, porque las primeras tienen con quién hablar y las segundas no.
+
+Es el manual de Facebook (universidad por universidad) y de Tinder (fiesta por fiesta). Es lento de arranque y después es exponencial.
+
+### 5.3 Un embajador por círculo, no publicidad
+
+Publicidad paga a jóvenes para instalar una app de mensajería vacía es plata tirada: instala uno solo, encuentra el desierto, desinstala.
+
+En su lugar: **una persona por curso, por carrera, por equipo**, que quiere que su grupo se mude y tiene un motivo propio para empujarlo. Se los busca a mano, se les da acceso anticipado, personalización exclusiva y el estatus de haber traído a su gente.
+
+### 5.4 Los verticales de arranque en Argentina
+
+En orden de facilidad, porque cada uno es un círculo cerrado con conversación diaria obligada:
+
+1. **Facultades** — UBA, UNLP, UTN, UNC. Cursadas, parciales, apuntes, grupos de comisión. Conversación diaria, alta rotación de grupos, y ya usan mal WhatsApp para esto.
+2. **Clubes y equipos amateur** — fútbol, hockey, rugby. Grupo obligado, coordinación semanal.
+3. **Escenas** — bandas, productoras de fiestas, gaming, skate. Chicas, densas, hiperconectadas entre sí.
+4. **Secundarios** — el premio grande y el más riesgoso. **No se entra acá hasta tener la moderación funcionando de verdad** (ver sección 8).
+
+---
+
+## 6. Modelo de negocio
+
+Hay que decirlo sin maquillaje: **en la Fase 1 y 2 no hay ingresos, y está bien.** Un producto que se monetiza antes de tener red se monetiza contra el único activo que necesita construir.
+
+Lo que **no** vamos a hacer, nunca, y es parte de la propuesta:
+
+- ❌ **Publicidad.** Es el modelo que volvió insoportable a todo lo demás.
+- ❌ **Vender datos.** Es lo primero que este usuario sospecha y lo último que nos perdonaría.
+- ❌ **Algoritmo que decide qué ves.** Tu bandeja está ordenada por cuándo llegó el mensaje. Punto.
+
+Lo que sí, en este orden:
+
+| Cuándo | Qué | Por qué funciona |
+|---|---|---|
+| **Fase 3** | **Ronda+** — suscripción barata, cosmética y de comodidad: stickers propios, temas de color, archivos más grandes, `@` reservado, más rondas. | Es el modelo de Discord Nitro y de Telegram Premium. El joven no paga por funcionalidad básica pero sí paga por identidad y estatus. |
+| **Fase 3** | **Ronda Negocios** — el canal propio para comercios del borrador 1, ahora sobre una audiencia joven real. | Los comercios pagan por llegar a este público, que es el más caro de alcanzar por Meta. Ahora tenemos algo que vender que antes no teníamos. |
+| **Fase 4** | Pagos dentro del chat, comisión por transacción. | Sólo con volumen. |
+
+**Gratis para siempre lo esencial.** Mensajes, rondas, archivos, llamadas. Si hay que pagar para hablar, no hay red.
+
+---
+
+## 7. Roadmap
+
+### Fase 0 — Validación (3 semanas, sin código de producto)
+Cambió por completo respecto del borrador 1: ya no son 20 comercios, son **20 jóvenes y un grupo real que se mude a un prototipo**. Detalle en [`02-fase-0.md`](02-fase-0.md).
+
+- 20 entrevistas a personas de 16 a 24 con el prototipo en la mano
+- **La prueba que vale:** agarrar un grupo real de 6 a 10 amigos y ver si aguantan una semana hablando en un prototipo cerrado
+- Chequeo de marca en INPI y dominio
+- Abrir la cuenta de Google Play (el trámite tarda)
+- **Criterio de salida:** si el grupo de prueba vuelve a WhatsApp antes del día 5, el producto no está listo. Se corrige y se repite antes de escribir la Fase 1.
+
+### Fase 1 — El mensajero (8–10 semanas)
+- Registro con `@`, teléfono opcional
+- Chats 1 a 1 en tiempo real, entregado y leído simétricos
+- **Rondas con temas**
+- Invitación por link, con el umbral de cinco
+- Fotos, audios, archivos
+- **Transcripción de audios**
 - Notificaciones push
-- Sincronización de contactos (quién de tu agenda ya está en Ronda)
-- **Publicada en App Store y Play Store** — aunque sea en beta cerrada
+- **Bloquear, reportar y borrar la cuenta desde adentro** (requisito de tienda, no opcional)
+- Publicada en App Store y Play Store, aunque sea en beta cerrada
 
-### Fase 2 — Ronda Negocios (6–8 semanas)
-- Perfil de comercio verificado
-- Suscripción del cliente por QR y por link
-- Bandeja comercial separada, con baja en un toque
-- Envíos a suscriptores, con límites claros
-- Panel web para el comercio
-- Facturación y cobro en pesos
+### Fase 2 — Lo social (6–8 semanas)
+- Efímero por chat y por ronda, con aviso de captura
+- Stickers, stickers propios, reacciones
+- Estados / "la ronda del día"
+- Llamadas de voz y video
+- Descubrimiento dentro del círculo: quién de tu facultad ya está
 
-### Fase 3 — Crecimiento (continuo)
-- Primeros 100 comercios pagos, uno por uno, a mano
-- Programa de referidos entre comercios
-- Métricas de retención semana a semana
+### Fase 3 — Densidad y primeros pesos
+- Diez círculos cerrados con más del 50% adentro
+- Ronda+ (suscripción cosmética)
+- Ronda Negocios sobre la base joven
+- Programa de embajadores formalizado
 
 ### Fase 4 — Mensajería completa
-- Llamadas de voz y video
 - Cifrado de punta a punta
-- Multi-dispositivo y versión de escritorio
-- Estados
+- Multi-dispositivo y escritorio
+- Pagos en el chat
 
 ---
 
-## 10. Arquitectura técnica
+## 8. El riesgo que puede hundir todo: los menores
 
-**Decisión de stack, con el porqué:**
+Esto merece su propio documento y lo tiene: [`04-menores-y-seguridad.md`](04-menores-y-seguridad.md). Acá va lo que un documento fundacional no puede omitir.
+
+Una app de mensajería para jóvenes es, por definición, **una app donde puede haber menores de edad hablando con desconocidos**. Ese es el riesgo más grande del proyecto: más grande que el efecto red, más grande que la plata. Mata proyectos por tres vías distintas —legal, de tiendas y de reputación— y las tres son irreversibles.
+
+**La decisión que se toma acá y no se discute después:**
+
+> **Edad mínima 16 años en el lanzamiento.** No 13.
+
+Por qué:
+- Bajo estándar europeo (GDPR art. 8), de 13 a 16 hace falta consentimiento verificable de un adulto responsable. Eso es un producto entero que no podemos construir en la Fase 1.
+- El grueso del riesgo de grooming está por debajo de los 16.
+- Los verticales de arranque (facultades, clubes, escenas) son mayoritariamente mayores de 16 igual. **No estamos resignando el mercado que queremos: lo estamos ordenando.**
+- La secundaria entra después, cuando la moderación esté probada y haya un producto de consentimiento parental de verdad.
+
+**Y desde el día uno, sin excepción:** bloquear, reportar, sin descubrimiento de desconocidos fuera de tu círculo, sin buscador abierto de usuarios, y un humano que responde los reportes en menos de 24 horas. Apple rechaza apps sociales que no tengan esto, y con razón.
+
+---
+
+## 9. Arquitectura técnica
+
+Sin cambios grandes respecto del borrador 1 — la pila era buena y sigue siéndolo. Lo que cambia es una decisión y sus consecuencias.
 
 | Capa | Elección | Por qué |
 |---|---|---|
-| **App móvil** | React Native + Expo (EAS) | Un solo código para iOS y Android. EAS Build y Submit publican en ambas tiendas sin armar toda la cadena de firmado a mano. Actualizaciones OTA sin esperar revisión de Apple. |
+| **App móvil** | React Native + Expo (EAS) | Un solo código para iOS y Android. EAS Build y Submit publican en las dos tiendas sin armar la cadena de firmado a mano. Actualizaciones OTA sin esperar a Apple. |
 | **Backend** | Node + TypeScript (Fastify) | Mismo lenguaje que la app: un equipo chico no se parte en dos. |
-| **Base de datos** | PostgreSQL | Aburrido y sólido. Lo que se quiere en la base de datos. |
+| **Base de datos** | PostgreSQL | Aburrido y sólido. Lo que se quiere en una base de datos. |
 | **Tiempo real** | WebSocket + Redis pub/sub | Entrega de mensajes y presencia. |
 | **Archivos** | S3 compatible + CDN | Fotos y audios no van por la base. |
-| **Push** | Expo Push → APNs / FCM | Una sola integración para las dos plataformas. |
-| **SMS (OTP)** | Proveedor local argentino | Entrega y precio muy mejores que los globales para números +54. |
+| **Push** | Expo Push → APNs / FCM | Una integración para las dos plataformas. |
+| **Transcripción de audio** | Whisper (modelo abierto) en el servidor | Barato, corre en CPU para audios cortos, y anda bien con acento rioplatense. Es un diferencial de producto, así que no se terceriza a un proveedor que pueda cortarlo. |
+| **Identidad** | `@` + contraseña + recuperación por mail; teléfono opcional | **Esto elimina el SMS obligatorio**, que era el costo que se comía el presupuesto al escalar. |
 
-**Atajo deliberado para la Fase 1:** arrancar sobre **Supabase** (Postgres + realtime + storage + auth administrados) y escribir a mano sólo lo que Supabase no cubre. Nos ahorra semanas de infraestructura para llegar a las tiendas. Cuando el volumen lo justifique, se migra el camino caliente a infra propia. **La base de datos sigue siendo Postgres estándar, así que la migración no es una reescritura.**
+**Atajo deliberado para la Fase 1:** arrancar sobre **Supabase** (Postgres + realtime + storage + auth administrados) y escribir a mano sólo lo que Supabase no cubra. Ahorra semanas de infraestructura para llegar a las tiendas. Sigue siendo Postgres estándar, así que migrar después no es reescribir.
 
-**Cifrado:** en la Fase 1, TLS en tránsito y cifrado en reposo. El cifrado de punta a punta llega en la Fase 4, bien hecho, no a las apuradas — implementado mal es peor que no tenerlo, y rompe backups, multi-dispositivo y búsqueda.
-
----
-
-## 11. Llegar a App Store y Play Store
-
-Esto es el requisito que puso el proyecto, así que va con los costos y los tiempos reales.
-
-**Lo que hay que tener sí o sí:**
-
-| Requisito | Apple | Google |
-|---|---|---|
-| Cuenta de desarrollador | US$ 99 / año | US$ 25 (única vez) |
-| Política de privacidad publicada | Obligatoria (URL) | Obligatoria (URL) |
-| Etiquetas de privacidad / Data safety | Obligatorias | Obligatorias |
-| **Borrar la cuenta desde adentro de la app** | Obligatorio | Obligatorio |
-| Moderación de contenido generado por usuarios | **Obligatoria** — bloquear, reportar, y responder reportes en 24 h | Obligatoria |
-| Tiempo de revisión | 1–3 días típico; la primera puede demorar más | Horas a días; cuentas nuevas pueden tardar más |
-
-⚠️ **Dos advertencias que hunden apps de mensajería en revisión:**
-
-1. **Apple rechaza apps sociales sin herramientas de moderación.** Bloquear usuario, reportar contenido y un canal de contacto son requisito, no funcionalidad opcional. Van en la Fase 1, no después.
-2. **Google Play exige tiempo de prueba con testers reales antes de publicar una cuenta de desarrollador personal nueva.** Hay que arrancar ese proceso temprano: no se resuelve la semana del lanzamiento.
+**Cifrado:** en la Fase 1, TLS en tránsito y cifrado en reposo. Punta a punta en la Fase 4, bien hecho. Mal implementado es peor que no tenerlo, y rompe backups, multi-dispositivo y —crítico acá— la moderación de reportes.
 
 ---
 
-## 12. Costos reales
-
-**Para llegar a las tiendas con el MVP:**
+## 10. Costos
 
 | Concepto | Costo aproximado |
 |---|---|
 | Apple Developer | US$ 99 / año |
 | Google Play | US$ 25 (única vez) |
 | Infraestructura (primeros miles de usuarios) | US$ 25–100 / mes |
-| SMS de verificación | Por mensaje — el rubro más caro al escalar; se negocia por volumen |
 | Dominio `.com.ar` | Bajo |
 | Marca en INPI | Trámite, moneda local |
+| **SMS de verificación** | **~0 — eliminado por la identidad por `@`** |
+| **Moderación** | **El costo real al escalar.** Empieza en horas de una persona y crece con los usuarios. Hay que presupuestarlo desde el principio: es lo que decide si la app sobrevive. |
 
-**Al escalar, el que se come el presupuesto es el SMS de verificación.** Hay que negociar volumen con un proveedor local desde temprano, y ofrecer verificación por llamada o WhatsApp como alternativa más barata.
+El cambio de identidad por `@` movió el costo dominante del SMS a la moderación. Es un intercambio bueno: el SMS crece con las altas y no se puede bajar; la moderación crece con el uso y se puede hacer más eficiente con herramientas.
 
 ---
 
-## 13. Marco legal argentino
+## 11. Marco legal argentino
 
 | Norma | Qué implica |
 |---|---|
-| **Ley 25.326 — Protección de Datos Personales** | Inscribir la base de datos ante la AAIP. Consentimiento informado. Derechos de acceso, rectificación y supresión del usuario. |
-| **Ley 24.240 — Defensa del Consumidor** | Términos claros, botón de arrepentimiento y baja simple para los planes pagos. |
-| **Ley 27.078 — Argentina Digital** | Marco de servicios TIC. |
-| **AFIP / ARCA** | Facturación electrónica de los planes. |
+| **Ley 25.326 — Protección de Datos Personales** | Inscribir la base ante la AAIP. Consentimiento informado. Derechos de acceso, rectificación y supresión. |
+| **Ley 26.061 — Protección Integral de Niñas, Niños y Adolescentes** | Marco de protección de menores. Relevante desde el momento en que un menor puede usar la app. |
+| **Ley 26.904 — Grooming** | Tipifica el contacto con menores con fines sexuales. Define obligaciones prácticas de reporte y conservación de prueba. |
+| **Ley 24.240 — Defensa del Consumidor** | Términos claros y baja simple, cuando haya planes pagos. |
+| **AFIP / ARCA** | Facturación electrónica, a partir de la Fase 3. |
 
-⚠️ La Ley 25.326 es de 2000 y le quedó vieja para aplicaciones móviles. Hay proyectos de reforma en danza. **Conviene diseñar contra el estándar europeo (GDPR), que es más exigente**: así la reforma nos encuentra ya cumpliendo, en vez de teniendo que rehacer.
+La 25.326 es del año 2000 y le quedó chica a las aplicaciones móviles. **Conviene diseñar contra el estándar europeo (GDPR), que es más exigente:** así una reforma nos encuentra cumpliendo en vez de rehaciendo.
 
-Antes del lanzamiento público hace falta un abogado especializado en datos personales. No es opcional y no es caro comparado con la multa.
+Antes del lanzamiento público hace falta un abogado especializado en datos personales **y en protección de menores**. No es opcional y es barato al lado de la multa.
 
 ---
 
-## 14. Riesgos
+## 12. Riesgos
 
 | Riesgo | Qué tan grave | Cómo lo bajamos |
 |---|---|---|
-| **No se rompe el arranque en frío** | 🔴 Alto — es el que mata el proyecto | La cuña por negocios. Cada comercio trae clientes. No dependemos de que la gente se mude sola. |
-| **Se llena de spam** | 🔴 Alto | Opt-in obligatorio, bandeja separada, baja en un toque, límites publicados. Desde el día uno, no parcheado después. |
-| **Meta copia el diferencial** | 🟡 Medio | No puede: su modelo es automatización a escala global. El soporte humano argentino no le cierra los números. |
-| **Costo de SMS al escalar** | 🟡 Medio | Proveedor local, negociación por volumen, alternativas de verificación. |
-| **Rechazo en las tiendas** | 🟡 Medio | Moderación y borrado de cuenta desde la Fase 1. Se prepara la cuenta de desarrollador con meses de anticipación. |
+| **No se rompe el arranque en frío** | 🔴 Alto — es el que mata proyectos como este | Migración por grupo, umbral de cinco, densidad por círculo cerrado, embajadores. Nunca "lanzamos en Argentina". |
+| **Un incidente con un menor** | 🔴 Alto — es el que mata *este* proyecto | Edad mínima 16, sin descubrimiento de desconocidos, moderación y reportes desde el día uno. Ver [`04-menores-y-seguridad.md`](04-menores-y-seguridad.md). |
+| **No hay plata y se termina el aire** | 🔴 Alto | Costos bajísimos por la identidad sin SMS. Sin equipo grande hasta la Fase 3. Monetización lista pero no encendida. |
+| **Instagram/Meta copia lo que funcione** | 🟡 Medio | No puede copiar "sin tu familia adentro": su base instalada *es* la familia. Puede copiar features sueltos, no la propuesta. |
+| **La app se llena de gente sola** | 🟡 Medio | El umbral de cinco. Es mejor un usuario menos que un usuario en un desierto. |
+| **Rechazo en las tiendas** | 🟡 Medio | Moderación, bloqueo, reporte y borrado de cuenta en la Fase 1. Cuenta de desarrollador abierta con meses de anticipación. |
 | **La marca "Ronda" ya está tomada** | 🟢 Bajo | Chequeo en INPI en la Fase 0, antes de gastar un peso en diseño. |
 
 ---
 
-## 15. Cómo sabemos si va bien
+## 13. Cómo sabemos si va bien
 
-No sirve mirar descargas. Las métricas que importan:
+Descargas no dicen nada. Lo que importa:
 
 | Métrica | Qué nos dice | Meta a 6 meses |
 |---|---|---|
-| **Comercios pagos** | Que el modelo cierra | 100 |
-| **Retención semana 4** | Que la gente vuelve | > 40% |
-| **Mensajes personales por usuario activo** | Que dejó de ser sólo un canal de ofertas y se volvió mensajería | Creciendo mes a mes |
-| **Invitados por comercio** | Que la cuña funciona | > 30 usuarios nuevos por comercio |
-| **Bajas de suscripción a canales** | Que no nos estamos volviendo spam | < 5% mensual |
+| **Densidad de círculo** — % de un curso/equipo adentro | Que la migración por grupo funciona | 10 círculos por encima del 50% |
+| **Rondas que llegan a cinco** | Que el umbral no es una traba fatal | > 40% de las rondas creadas |
+| **Retención semana 4** | Que la gente vuelve | > 35% |
+| **Mensajes por usuario activo por día** | Que es su mensajero y no un experimento | Creciendo mes a mes |
+| **Días hasta el quinto miembro** | Qué tan rápido se contagia un grupo | < 3 días |
+| **Reportes resueltos en 24 h** | Que la seguridad no es un cartel | 100% |
 
-**La más importante es la tercera.** Si los usuarios entran por el comercio pero nunca se mandan un mensaje entre ellos, Ronda es una herramienta de marketing, no una app de mensajería. Útil, vendible — pero no es lo que nos propusimos.
-
----
-
-## 16. El próximo paso
-
-**Fase 0. Veinte conversaciones con comercios antes de la primera línea de código de producto.**
-
-Es tentador saltearlo y ponerse a programar. Sería el error caro: construir diez semanas de app para descubrir que el dolor no alcanzaba para que alguien pague.
-
-En paralelo, sin costo y sin riesgo:
-- Landing de pre-registro para medir demanda real
-- Chequeo de la marca en INPI
-- Abrir la cuenta de Google Play (el trámite tarda, conviene largarlo ya)
+**La más importante es la primera.** Si tenemos 50.000 usuarios desparramados y ningún círculo denso, no tenemos una red: tenemos una lista.
 
 ---
 
-*Documento vivo. Se corrige con lo que digan los 20 comercios, no con lo que suponemos hoy.*
+## 14. El próximo paso
+
+**Fase 0. Veinte conversaciones con jóvenes y un grupo real migrado a un prototipo, antes de la primera línea de código de producto.**
+
+Es tentable saltearlo. Sería el error caro: diez semanas de app para descubrir que el grupo de prueba volvió a WhatsApp el jueves.
+
+El prototipo jugable ya está: [`../prototipo/`](../prototipo/). Sirve para que las 20 entrevistas se hagan con algo en la mano en vez de con una descripción.
+
+---
+
+*Documento vivo. Se corrige con lo que digan los 20, no con lo que suponemos hoy.*
