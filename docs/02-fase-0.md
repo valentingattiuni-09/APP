@@ -115,6 +115,16 @@ La semana de migración tiene que contestar además lo que introdujo [`05-mecani
 4. **¿La racha los hizo hablar o los hizo fingir?** Si aparecen mensajes vacíos para sostener el número, la regla de tres personas no alcanza.
 5. **¿Se les pasó algo importante por no tener notificaciones?** Si sí, confirma que Ronda es la segunda app y no la primera — que es justo lo que queremos saber.
 
+### Y tres sobre el dinero
+
+Van en las entrevistas de la semana 1, al final, y sirven para decidir el modelo de [`06-el-juego.md`](06-el-juego.md):
+
+1. **¿Pagarías US$ 1,80 por mes si tu grupo pudiera ganar US$ 10.000?**
+2. **¿Mandarías 300 mensajes por día durante 10 días por esa plata? ¿Y tu grupo entero, los diez?** Es la pregunta que decide el torneo.
+3. **¿Qué te parecería que te pidan la cara para cobrar el premio?**
+
+> **Truco para la número 2:** si contestan que sí muy rápido, volvé a preguntar al día siguiente. El entusiasmo declarado sobre esfuerzo futuro es la respuesta que más miente de todas.
+
 ### Qué significa cada resultado
 
 | Resultado | Qué significa |

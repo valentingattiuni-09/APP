@@ -317,6 +317,37 @@ p{margin:0}
 .push p{font-size:12.5px;color:var(--ink-2);margin-top:2px;line-height:1.35}
 .push .cuando{font-size:11px;color:var(--ink-3);flex:none}
 
+/* ---------- torneo ---------- */
+.banner{
+  display:flex;align-items:center;gap:12px;margin:12px 16px 4px;padding:12px 14px;
+  border-radius:16px;width:calc(100% - 32px);text-align:left;
+  background:linear-gradient(120deg,rgba(242,121,61,.18),rgba(255,178,61,.10));
+  border:1px solid rgba(242,121,61,.32);
+}
+.banner .llama{font-size:20px;flex:none}
+.banner b{display:block;font-size:13.5px;font-weight:600}
+.banner small{display:block;font-size:12px;color:var(--ink-3);line-height:1.3}
+.banner .ir{color:var(--accent);font-size:18px;flex:none}
+
+.pozo{
+  margin:0 20px;padding:20px;border-radius:20px;text-align:center;
+  background:linear-gradient(150deg,rgba(242,121,61,.22),rgba(111,208,192,.10));
+  border:1px solid rgba(242,121,61,.3);
+}
+.pozo .mono{color:var(--ink-3)}
+.pozo .plata{font-family:"Familjen Grotesk",sans-serif;font-size:40px;font-weight:700;line-height:1.05;margin:6px 0 2px;letter-spacing:-.03em}
+.barrita{height:6px;border-radius:999px;background:rgba(255,255,255,.12);margin-top:14px;overflow:hidden}
+.barrita i{display:block;height:100%;border-radius:999px;background:var(--accent);transition:width .4s ease}
+.tabla{display:flex;flex-direction:column}
+.fila{display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--line-soft)}
+.fila .pos{width:22px;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);flex:none;text-align:right}
+.fila .nom{flex:1;min-width:0;font-size:14.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fila .dias{font-size:13px;color:var(--fuego);font-weight:600;flex:none;font-variant-numeric:tabular-nums}
+.fila.yo{background:rgba(242,121,61,.12)}
+.fila.yo .nom{color:var(--accent);font-weight:600}
+.regla{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;color:var(--ink-2);line-height:1.4}
+.regla span{color:var(--teal);flex:none}
+
 /* ---------- notas ---------- */
 .notes{
   position:absolute;left:12px;right:12px;bottom:12px;z-index:30;
@@ -537,6 +568,7 @@ const NOTAS = {
   bandeja: ["Sin notificaciones","No hay globo rojo por un “jajaja”. La única notificación del día es una hora antes de que cierre. Probá el botón “Aviso” de arriba."],
   ronda_v: ["Guardar tiene cupo","Diez por ronda. Sin cupo la gente guarda todo y el producto vuelve a ser un archivo. Tocá un mensaje para guardarlo."],
   chat:    ["Lo que entra y lo que sale","Fotos de una sola vez, TikToks por el compartir del sistema, y el audio que se convierte en video vertical listo para subir — con la marca adentro. Ese es el motor de crecimiento."],
+  torneo:  ["El pozo es un porcentaje","El 40% de lo que entró ese mes, no un monto fijo: así el premio nunca puede ser más grande que la plata que entró. Y el contador de cuánto falta para los US$ 10.000 convierte a cada suscriptor en alguien que quiere que entren más."],
   vos:     ["La pantalla más corta","Notificaciones tiene una sola línea y ningún interruptor. El día que aparezca un segundo tipo de aviso, Ronda se volvió lo que dijo que no era."]
 };
 
@@ -579,7 +611,7 @@ function pintar(){
   const d = dev();
   const vistas = {
     splash:vSplash, alta:vAlta, ronda:vRonda, umbral:vUmbral,
-    bandeja:vBandeja, ronda_v:vRondaVista, chat:vChat, vos:vVos
+    bandeja:vBandeja, ronda_v:vRondaVista, chat:vChat, vos:vVos, torneo:vTorneo
   };
   d.innerHTML = "";
   const s = document.createElement("section");
@@ -826,15 +858,21 @@ function vBandeja(s){
         f[0].toUpperCase() + f.slice(1) + '</button>'
       ).join("") +
     '</div>' +
-    '<div class="scroll" id="lista"></div>';
+    '<div class="scroll" id="lista">' +
+      '<button class="banner" id="torneo"><span class="llama">🏆</span>' +
+      '<div style="flex:1;min-width:0"><b>Torneo de septiembre · US$ ' + mil(porGrupo()) + ' por grupo</b>' +
+      '<small>30.000 mensajes en 10 días. Participar es gratis.</small></div>' +
+      '<span class="ir">›</span></button>' +
+    '</div>';
 
   $("#vos", s).onclick = () => ir("vos");
+  $("#torneo", s).onclick = () => ir("torneo");
   s.querySelector(".filters").onclick = e => {
     const b = e.target.closest("[data-f]"); if(!b) return;
     S.filtro = b.dataset.f; pintar();
   };
 
-  $("#lista", s).innerHTML = visibles.map(k => {
+  $("#lista", s).insertAdjacentHTML("beforeend", visibles.map(k => {
     const c = convos[k], u = ultimo(c);
     const quien = c.tipo === "ronda" && u.de ? (u.de === "yo" ? "Vos: " : nombre(u.de) + ": ") : "";
     const tema = c.tipo === "ronda" ? '<i>#' + esc(temaActivo(c)) + '</i> · ' : "";
@@ -844,12 +882,12 @@ function vBandeja(s){
       '<div class="mid"><div class="top"><b>' + esc(c.titulo) + '</b>' +
         '<span class="meta">🔥 ' + c.racha + '</span></div>' +
       '<div class="prev">' + tema + esc(quien + u.txt) + '</div></div>' + cd + '</button>';
-  }).join("");
+  }).join(""));
 
-  $("#lista", s).onclick = e => {
+  $("#lista", s).addEventListener("click", e => {
     const b = e.target.closest("[data-k]"); if(!b) return;
     abrirConvo(b.dataset.k);
-  };
+  });
 }
 
 /* =====================================================================
@@ -1211,7 +1249,90 @@ function capaPush(){
 }
 
 /* =====================================================================
-   7 · Vos
+   7 · Torneo — el pozo es un porcentaje de lo que entró, no un premio fijo
+   ===================================================================== */
+
+/* El pozo es un porcentaje de lo que entró, no un monto fijo: por eso no
+   puede quebrar al proyecto. A 210.000 suscriptores da US$ 10.000 por grupo. */
+const SUSCRIPTORES = 96400, NETO = 1.20, PARTE = 0.40, GRUPOS = 10, META_GRUPO = 10000;
+function pozo(){ return Math.round(SUSCRIPTORES * NETO * PARTE); }
+function porGrupo(){ return Math.round(pozo() / GRUPOS); }
+function faltanSuscriptores(){
+  return Math.max(0, Math.ceil(META_GRUPO * GRUPOS / (NETO * PARTE)) - SUSCRIPTORES);
+}
+const mil = n => n.toLocaleString("es-AR");
+
+const RIVALES = [
+  {n:"Sistemas 2do turno noche", d:31},
+  {n:"las nenas", d:29},
+  {n:"Club Atlético Sarmiento", d:27},
+  {n:"la previa", d:24},
+  {n:"Arqui UNLP", d:22},
+  {n:"los del fondo", d:19}
+];
+
+function vTorneo(s){
+  crearMiRonda();
+  const mia = convos["g:mia"], pibes = convos["g:pibes"];
+  const tabla = RIVALES
+    .concat([{n:pibes.titulo, d:pibes.racha}, {n:mia.titulo, d:mia.racha, yo:true}])
+    .sort((a,b) => b.d - a.d);
+  const puesto = tabla.findIndex(r => r.yo) + 1;
+  const porCabeza = Math.round(porGrupo() / 10);
+  const pct = Math.min(100, Math.round(porGrupo() / META_GRUPO * 100));
+
+  s.innerHTML =
+    '<div class="head"><button class="back" id="b">‹</button>' +
+      '<div class="ttl"><b>Torneo de septiembre</b><small>quedan 8 días</small></div></div>' +
+    '<div class="scroll col g20" style="padding:20px 0 24px">' +
+
+      '<div class="pozo">' +
+        '<div class="mono">Premio de este mes, por grupo</div>' +
+        '<div class="plata">US$ ' + mil(porGrupo()) + '</div>' +
+        '<p class="dim" style="font-size:13px">US$ ' + mil(porCabeza) + ' por cabeza. ' +
+        'Ganan los 10 grupos que más hablaron.</p>' +
+        '<div class="barrita"><i style="width:' + pct + '%"></i></div>' +
+        '<p class="hint" style="margin-top:8px">El pozo es el <b style="color:var(--ink-2)">40% de lo que entra</b>. ' +
+        'Faltan <b style="color:var(--accent)">' + mil(faltanSuscriptores()) + ' suscriptores</b> para que sean US$ ' +
+        mil(META_GRUPO) + ' por grupo.</p>' +
+      '</div>' +
+
+      '<div class="col g6" style="padding:0 20px">' +
+        '<div class="mono" style="color:var(--ink-3)">El objetivo</div>' +
+        '<p class="dim" style="font-size:14.5px"><b style="color:var(--ink)">30.000 mensajes válidos en 10 días.</b> ' +
+        'Son 300 por persona por día. Clasifican todos los que lo superen; ganan los 10 con más.</p></div>' +
+
+      '<div class="col g10" style="padding:0 20px">' +
+        regla("Participar es gratis. Ronda+ da stickers, nunca ventaja.") +
+        regla("Los 10 días tienen que ser válidos: 5 personas, 20 mensajes cada una.") +
+        regla("Mensaje válido: 4 palabras o más, sin repetir ninguno de los últimos 20.") +
+        regla("Una persona compite en una sola ronda por mes.") +
+        regla("De 14 y 15 se juega y se aparece en la tabla, pero sin premio en efectivo.") +
+      '</div>' +
+
+      '<div class="col">' +
+        '<div class="mono" style="padding:0 20px 8px;color:var(--ink-3)">Tabla · días válidos</div>' +
+        '<div class="tabla">' +
+          tabla.map((r,i) =>
+            '<div class="fila' + (r.yo ? " yo" : "") + '"><span class="pos">' + (i+1) + '</span>' +
+            '<span class="nom">' + esc(r.n) + (r.yo ? " · vos" : "") + '</span>' +
+            '<span class="dias">🔥 ' + r.d + '</span></div>'
+          ).join("") +
+        '</div>' +
+      '</div>' +
+
+      '<p class="hint" style="padding:0 20px">Vas ' + puesto + '.ª con ' + mia.racha +
+        (mia.racha === 1 ? " día válido" : " días válidos") + '. Un día no cuenta si no hablaron cinco.</p>' +
+    '</div>';
+
+  $("#b", s).onclick = () => ir("bandeja");
+}
+function regla(t){
+  return '<div class="regla"><span>◆</span><span style="color:var(--ink-2)">' + esc(t) + '</span></div>';
+}
+
+/* =====================================================================
+   8 · Vos
    ===================================================================== */
 
 function vVos(s){

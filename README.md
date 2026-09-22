@@ -42,6 +42,7 @@ Dos claves operativas:
 | [`docs/03-producto.md`](docs/03-producto.md) | Qué se construye: los cuatro objetos, las seis pantallas de la Fase 1, y la lista explícita de lo que **no** se construye |
 | [`docs/04-menores-y-seguridad.md`](docs/04-menores-y-seguridad.md) | El riesgo número uno: edad mínima, diseño contra el contacto de desconocidos, moderación, protocolo ante un incidente grave y marco legal |
 | [`docs/05-mecanica.md`](docs/05-mecanica.md) | **El motor del producto:** el vencimiento, la hora de la ronda, guardar con cupo, la notificación única, las rachas, el audio→video, y la discusión honesta sobre retención por pérdida |
+| [`docs/06-el-juego.md`](docs/06-el-juego.md) | **El torneo de los US$ 10.000:** cuántos mensajes pedir y por qué, los números del pozo como porcentaje de lo que entra, el problema de la edad, el fraude y la lista para el abogado |
 | [`prototipo/`](prototipo/) | El prototipo jugable, para las entrevistas |
 
 ---
@@ -79,7 +80,7 @@ Sin publicidad, sin vender datos, sin algoritmo que decida qué ves, sin escanea
 - **Fase 0** · Validación — 3 semanas ← *estamos acá: prototipo listo, faltan las 20 entrevistas y la migración de un grupo*
 - **Fase 1** · El mensajero con el motor de vencimiento, publicado en App Store y Play Store — 8-10 semanas
 - **Fase 2** · Lo social: rachas, audio→video, stickers, llamadas — 6-8 semanas
-- **Fase 3** · Densidad y primeros pesos: Ronda+ y Ronda Negocios
+- **Fase 3** · Densidad y primeros pesos: Ronda+, el torneo mensual y Ronda Negocios
 - **Fase 4** · Cifrado de punta a punta, multi-dispositivo, pagos
 
 ## Stack previsto (Fase 1)

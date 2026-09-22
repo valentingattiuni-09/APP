@@ -84,7 +84,7 @@ Las reglas están pensadas para que la racha empuje a hablar y no a fingir que s
 | Regla | Por qué |
 |---|---|
 | **La racha es de la ronda, no de cada par de personas** | Reparte la carga entre todos en vez de poner a dos personas a sostener un número. Y refuerza lo que ya decidimos: la unidad es el grupo. |
-| **Cuenta conversación, no mensajes** | Un día suma si hablaron **al menos tres personas**. Una sola persona mandando "🔥" todos los días no sostiene nada. |
+| **Cuenta conversación, no mensajes** | Un día suma si hablaron **al menos tres personas**, con al menos cinco mensajes válidos cada una. Una sola persona mandando "🔥" todos los días no sostiene nada. Qué cuenta como mensaje válido está en [`06-el-juego.md`](06-el-juego.md) §6.5. |
 | **Hay perdón** | Se puede faltar un día sin perder la racha, una vez por semana. |
 | **Se puede pausar** | Vacaciones, finales, lo que sea: se avisa y la racha queda congelada. Sin culpa y sin trampa. |
 | **No se compra** | Ningún plan pago devuelve una racha perdida. En el segundo en que se puede comprar, deja de significar algo. |

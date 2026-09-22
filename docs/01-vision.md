@@ -198,11 +198,14 @@ Lo que sí, en este orden:
 
 | Cuándo | Qué | Por qué funciona |
 |---|---|---|
-| **Fase 3** | **Ronda+** — suscripción barata, cosmética y de comodidad: stickers propios, temas de color, archivos más grandes, `@` reservado, más rondas. | Es el modelo de Discord Nitro y de Telegram Premium. El joven no paga por funcionalidad básica pero sí paga por identidad y estatus. |
+| **Fase 3** | **Ronda+** — suscripción **opcional** de unos US$ 1,80 por mes: stickers propios, temas de color, `@` reservado, guardados extra. | Es el modelo de Discord Nitro y de Telegram Premium. El joven no paga por funcionalidad básica pero sí paga por identidad y estatus. |
+| **Fase 3** | **El torneo** — el 40% de todo lo que entra por Ronda+ vuelve cada mes en premios, repartido entre los 10 grupos que más hablaron. Meta publicada: **US$ 10.000 por grupo**, que se alcanza a los 210.000 suscriptores. Participar es gratis. | Le da a Ronda+ un motivo para existir más allá de lo cosmético y le da a TikTok algo que contar. Es imposible que quiebre al proyecto porque el pozo es un porcentaje de lo que entró, no un monto fijo. Ver [`06-el-juego.md`](06-el-juego.md). |
 | **Fase 3** | **Ronda Negocios** — el canal propio para comercios del borrador 1, ahora sobre una audiencia joven real. | Los comercios pagan por llegar a este público, que es el más caro de alcanzar por Meta. Ahora tenemos algo que vender que antes no teníamos. |
 | **Fase 4** | Pagos dentro del chat, comisión por transacción. | Sólo con volumen. |
 
 **Gratis para siempre lo esencial.** Mensajes, rondas, archivos, llamadas. Si hay que pagar para hablar, no hay red.
+
+**Y gratis para competir.** Ronda+ da cosméticos, nunca ventaja en el torneo. Eso no es sólo una decisión de producto: es lo que separa un concurso promocional de un juego con apuesta, que en Argentina no se puede correr sin autorización. El razonamiento completo y las cuentas están en [`06-el-juego.md`](06-el-juego.md).
 
 ---
 
