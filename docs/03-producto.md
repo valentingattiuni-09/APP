@@ -1,6 +1,6 @@
 # Producto — Qué se construye y qué no
 
-> **Para qué sirve este documento:** traducir la estrategia de [`01-vision.md`](01-vision.md) en pantallas y decisiones concretas. Lo que no está acá, no se construye en la Fase 1, por bueno que suene.
+> **Para qué sirve este documento:** traducir la estrategia de [`01-vision.md`](01-vision.md) y la mecánica de [`05-mecanica.md`](05-mecanica.md) en pantallas y decisiones concretas. Lo que no está acá, no se construye en la Fase 1, por bueno que suene.
 
 ---
 
@@ -24,6 +24,8 @@ Sólo hay cuatro cosas en Ronda. Si aparece una quinta, algo se fue de escala.
 | **Privado** | Conversación entre dos personas. |
 | **Ronda** | El grupo. Tiene nombre, miembros, y **temas** adentro. |
 | **Tema** | Un canal de conversación dentro de una ronda: `#general`, `#parcial`, `#memes`. Una ronda siempre tiene al menos `#general`. |
+
+Y una propiedad que atraviesa a los cuatro: **todo lo que se manda tiene fecha de vencimiento.** Cada ronda tiene su hora de cierre y todo lo del día se borra ahí, salvo lo que alguien guarde. Los detalles, en [`05-mecanica.md`](05-mecanica.md).
 
 **Lo que deliberadamente no existe:** feed, algoritmo, recomendados, "personas que quizás conozcas", buscador global de usuarios, publicidad, historias de marcas. Nada de eso mueve la aguja de la migración y todo eso trae los problemas de la sección 4.
 
@@ -75,18 +77,26 @@ Arriba, dos filtros y nada más: **Todo** · **Rondas** · **Privados**.
 
 Lo que se espera de un chat, bien hecho:
 
-- Texto, foto, video, archivo, audio, ubicación
-- Responder citando, reaccionar con emoji, editar (15 min), borrar para todos
-- Buscar dentro de la conversación
+- Texto, foto, audio, links
+- Responder citando, reaccionar con emoji, borrar para todos
 
-Y las cuatro cosas nuestras:
+**No hay buscar** — no hay dónde buscar. Tampoco editar: a las horas ya no está.
+
+Y las cosas nuestras:
 
 | Qué | Cómo se ve |
 |---|---|
-| **Audio con transcripción** | Cada audio muestra forma de onda, duración, botón de velocidad (1× / 1,5× / 2×) y **el texto debajo, plegado**. Se toca y se expande. Se puede tocar una palabra de la transcripción y el audio salta ahí. |
-| **Perilla de efímero** | Arriba de la conversación, visible, no en un submenú: **Se guarda · 24 h · Al leer**. Cambiarla avisa a todos en el chat. |
+| **Cuenta regresiva** | Cada mensaje muestra cuánto le queda, discreto. Cuando falta menos de una hora, se marca. |
+| **Guardar** | Al tocar un mensaje, junto a las reacciones. Lo guardado queda marcado con quién lo guardó, y el cupo visible: *"te quedan 7"*. |
+| **Encabezado de la ronda** | La hora de cierre y la racha: **🔥 12 · cierra 22:00**. |
+| **Fotos de una sola vez** | Llegan tapadas. Se tocan, se ven con un contador arriba, y no vuelven. Aviso de captura. |
+| **TikToks** | Tarjeta con la miniatura, que abre TikTok. |
+| **Hacer video** | En cada audio, junto a la transcripción. Abre la vista previa del video vertical y lo entrega listo para subir. |
+
+| Qué | Cómo se ve |
+|---|---|
+| **Audio con transcripción** | Forma de onda, duración, velocidad (1× / 1,5× / 2×) y **el texto debajo, plegado**. Tocar una palabra salta a esa parte del audio. |
 | **Sin presión** | No hay "en línea", no hay "últ. vez", no hay "escribiendo…" salvo que lo prendas vos. Ver §3. |
-| **Aviso de captura** | Si alguien saca captura en un chat efímero, aparece en la conversación. No lo impide: lo dice. |
 
 ### 2.5 Ronda por dentro
 
@@ -100,7 +110,15 @@ Cualquier miembro puede crear un tema. Los temas se pueden silenciar de a uno �
 
 **Invitaciones:** por link. Nadie entra sin aceptar, nadie agrega a nadie. Quien crea la ronda puede elegir si el link lo puede pasar cualquiera o sólo quien la creó.
 
-### 2.6 Vos
+### 2.6 Notificaciones — la pantalla más corta de la app
+
+En ajustes hay una sección de notificaciones y tiene **una sola línea**, sin interruptor:
+
+> **Ronda te avisa una vez por día**, una hora antes de que cierre tu ronda. Nada más. No te avisamos mensajes nuevos.
+
+Es la pantalla que más hay que cuidar de todo el producto, porque es la promesa entera en dos renglones. El día que aparezca un segundo tipo de notificación, Ronda se volvió lo que dijo que no era.
+
+### 2.7 Vos
 
 Perfil, y las cosas que las tiendas exigen y que no son negociables:
 
@@ -142,6 +160,10 @@ Vale la pena escribirlo, porque cada una de estas cosas va a ser pedida por algu
 | **Cifrado punta a punta** | Sí, pero en la Fase 4. Mal hecho es peor que no tenerlo, y rompe multi-dispositivo, backup y la moderación de reportes que las tiendas exigen. Hay que decirlo con todas las letras en la política de privacidad: en la Fase 1 hay TLS y cifrado en reposo, no E2E. |
 | **Importar la agenda del teléfono** | Es el gesto más invasivo de la mensajería y contradice toda la propuesta. Se encuentra gente por link, no por agenda. |
 | **Bots / API abierta** | Fase 4. |
+| **Historial, backup o "recuperar lo borrado"** | Es el producto al revés. Y en particular: **nunca se cobra por recuperar algo perdido.** Ver `05-mecanica.md` §7. |
+| **Guardar fotos** | Las fotos se ven una vez. Si se pudieran guardar, no se manda ninguna. |
+| **Videos propios** | Suben el costo de almacenamiento y el de moderación, y no son lo que buscamos: queremos que se hablen todos los días, no que se manden producciones. El video llega de afuera (TikTok) o sale de adentro (audio → video). |
+| **Notificar mensajes nuevos** | Es la promesa central. Si cae, cae el producto. |
 
 ---
 
@@ -175,13 +197,17 @@ En este orden, porque cada paso hace demostrable al anterior:
 
 1. Alta con `@` y sesión
 2. Privados en tiempo real, sólo texto
-3. Rondas con temas
-4. Invitación por link y umbral de cinco
-5. Fotos y archivos
-6. Audios
-7. **Transcripción**
-8. Push
-9. **Bloquear, reportar, borrar cuenta** ← sin esto no hay publicación en tiendas
-10. Beta cerrada en App Store y Play Store
+3. **Vencimiento a la hora de la ronda, y guardar con cupo** ← el motor; va temprano porque todo lo demás se apoya acá
+4. Rondas con temas
+5. Invitación por link y umbral de cinco
+6. **La notificación diaria de cierre**
+7. Fotos de una sola vez
+8. Audios
+9. **Transcripción**
+10. **Racha de la ronda**
+11. TikToks por el compartir del sistema
+12. **Audio → video**
+13. **Bloquear, reportar (con congelamiento de la evidencia), borrar cuenta** ← sin esto no hay publicación en tiendas
+14. Beta cerrada en App Store y Play Store
 
 > El paso 9 no va al final por poco importante: va al final porque es el único que no se puede demostrar antes de tener todo lo demás. **Pero no se manda a revisión sin él**, y por eso está antes del 10 y no después.

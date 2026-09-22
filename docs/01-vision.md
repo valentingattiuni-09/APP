@@ -1,8 +1,9 @@
 # Ronda — Documento fundacional
 
-> **Estado:** borrador 2 · Septiembre 2026 · **pivot**
+> **Estado:** borrador 3 · Septiembre 2026
 > **Nombre de trabajo:** Ronda (la ronda de mate: el círculo donde se pasa la palabra)
-> **Qué cambió respecto del borrador 1:** la cuña ya no son los comercios. Son los jóvenes. El borrador 1 entraba por quien paga; este entra por quien se muda. El razonamiento completo está en la sección 3.
+> **Qué cambió en el borrador 2:** la cuña dejó de ser los comercios y pasó a ser los jóvenes. El borrador 1 entraba por quien paga; este entra por quien se muda. El razonamiento está en la sección 3.
+> **Qué cambió en el borrador 3:** todo se vence a las 24 horas, y con eso Ronda dejó de ser un reemplazo de WhatsApp para ser el lugar del boludeo diario. La mecánica completa está en [`05-mecanica.md`](05-mecanica.md) y su consecuencia estratégica, en la sección 3.3.
 
 ---
 
@@ -17,6 +18,8 @@ Contra esa infraestructura hay una sola grieta, y es de edad.
 **Ronda es la app de mensajería de los que ya no quieren estar donde está su vieja.**
 
 No peleamos por reemplazar WhatsApp para todo el país. Peleamos por ser donde ocurre la conversación de los menores de 25 años, que es el único segmento que en la historia de la mensajería se mudó de verdad, y que arrastra al resto en los diez años siguientes.
+
+**Y no le pedimos a nadie que se mude.** En Ronda todo se borra a las 24 horas, a una hora fija, la misma para todo el grupo; no hay notificaciones de mensajes nuevos, sólo un aviso por día antes de que cierre. Eso la vuelve inútil para coordinar algo urgente y perfecta para el rato: **Ronda se instala al lado de WhatsApp, no en su lugar.** El que tiene que aflojar terreno no es WhatsApp — es el DM de Instagram, que es donde hoy está ese rato.
 
 ---
 
@@ -73,13 +76,36 @@ Toda decisión de producto de Ronda se evalúa contra una sola pregunta: **¿est
 
 No se tiran. Se corren de lugar: **dejan de ser la cuña y pasan a ser la monetización**, en la Fase 3. Cuando haya una base joven real y densa, el canal de comercios vale mucho más de lo que valía como punto de partida — porque tiene atrás una audiencia que Meta le cobra carísimo alcanzar. Todo el trabajo del borrador 1 sobre el modelo de negocio, los planes y la promesa de "no te bajamos la cuenta por un algoritmo" sigue vigente; sólo cambia cuándo.
 
+### 3.3 Segunda app, no app de reemplazo
+
+El borrador 3 corrige un supuesto del borrador 2. Ahí la migración era el objetivo: que un grupo se fuera de WhatsApp. Con la mecánica de vencimiento eso deja de ser necesario, y es una mejora:
+
+| | Borrador 2 | Borrador 3 |
+|---|---|---|
+| **Qué es Ronda** | Un mensajero para jóvenes | El lugar del boludeo diario |
+| **Contra quién compite** | WhatsApp | El DM de Instagram |
+| **Qué le pide al usuario** | Que se mude | Que instale al lado |
+| **Qué métrica manda** | Densidad del círculo | Días seguidos |
+
+**Esto baja el riesgo que más pesaba.** El arranque en frío mataba el proyecto porque le pedíamos a un grupo que abandonara la app donde tiene su vida. Ahora no le pedimos que abandone nada: le pedimos un rato. La contracara es que la retención pasa a ser todo — con esta mecánica, o la app es diaria o no existe.
+
+El umbral de cinco y la migración por grupo siguen valiendo: es cómo entra un grupo completo. Lo que cambió es que ya no tiene que salir de ningún lado para entrar acá.
+
 ---
 
 ## 4. Qué es Ronda
 
-**Ronda es la app donde hablás con tu gente, sin tu familia adentro y sin dar tu número.**
+**Ronda es la app donde hablás con tu gente todos los días, y al otro día no quedó nada.**
 
-Cinco decisiones de producto la definen. Cada una ataca uno de los dolores de la sección 2, y cada una es algo que WhatsApp **no puede copiar sin romperse**, porque su base instalada de mil millones de adultos depende de lo contrario.
+Seis decisiones de producto la definen.
+
+### 0. Todo se vence a las 24 horas
+
+Mensajes, audios, fotos y links se borran solos. Y no cada uno por su cuenta: **la ronda entera cierra a una hora fija**, la misma para todos. Lo que alguien quiere salvar, lo guarda a mano, y guardar tiene cupo.
+
+**No hay notificaciones de mensajes nuevos. Hay una sola por día**, una hora antes de que cierre la ronda, diciendo exactamente qué se va a perder.
+
+Es la decisión de la que cuelgan todas las demás y tiene documento propio: [`05-mecanica.md`](05-mecanica.md). Lo que hay que retener acá es por qué WhatsApp no puede copiarla: su producto **es** el archivo permanente donde está tu historia con todo el mundo. Borrar todo a las 24 horas rompe la razón por la que mil millones de adultos lo tienen abierto. Cada una ataca uno de los dolores de la sección 2, y cada una es algo que WhatsApp **no puede copiar sin romperse**, porque su base instalada de mil millones de adultos depende de lo contrario.
 
 ### 1. Sos un `@`, no un número
 
@@ -105,9 +131,15 @@ Sin "en línea". Sin "últ. vez". Sin "escribiendo…" salvo que vos lo prendas.
 
 Transcripción automática, velocidad 1×/1,5×/2×, forma de onda para saltar, y reanudar donde lo dejaste. El audio de siete minutos deja de ser una condena.
 
+### 6. Lo que se manda y lo que sale
+
+**Fotos de una sola vez**: se abren, se ven, se van, con aviso de captura. **TikToks**: llegan por el compartir del sistema, sin integración ni permiso de nadie. **Audios que salen como video**: un audio del grupo se convierte en un video vertical listo para subir, con la forma de onda y la transcripción en pantalla.
+
+Lo último no es una comodidad: es el motor de crecimiento. Cada video exportado lleva la marca adentro y se publica justo donde está el público que queremos.
+
 ### Y además, lo que se da por hecho
 
-Chats 1 a 1 y grupales, fotos, videos, archivos, ubicación, reacciones, stickers, responder citando, buscar. **Funcionando bien en redes argentinas malas y en teléfonos de gama baja**, que no es un detalle: es la mitad del mercado.
+Chats 1 a 1 y grupales, fotos, audios, links, reacciones, responder citando. **Funcionando bien en redes argentinas malas y en teléfonos de gama baja**, que no es un detalle: es la mitad del mercado.
 
 ---
 

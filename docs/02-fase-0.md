@@ -89,7 +89,7 @@ Se elige **un grupo real de 6 a 10 personas** que ya hablen todos los días — 
 
 Se les pide **una semana**. Todo lo que se hablarían por WhatsApp, se habla en el prototipo. WhatsApp queda para la familia y el resto del mundo, que es exactamente la propuesta de Ronda.
 
-> **No hace falta la app.** Alcanza un grupo de Telegram configurado a mano para imitar las reglas de Ronda (temas separados, sin "en línea", sin "últ. vez", nadie agrega a nadie sin aceptar), o el prototipo web abierto en el teléfono si ya alcanza para sostener la conversación. Lo que se está probando no es el software: **es si la gente aguanta hablar en otro lado.**
+> **No hace falta la app.** Alcanza un grupo de Telegram configurado a mano para imitar las reglas de Ronda: temas separados, sin "en línea", sin "últ. vez", **notificaciones silenciadas para todos**, y una persona que a la hora acordada borra el historial del día y avisa una hora antes. Es incómodo y se hace igual: lo que se está probando no es el software, **es si la gente aparece a la hora y si aguanta perder lo del día.**
 
 ### Qué se mide, día por día
 
@@ -104,6 +104,16 @@ Y al final de la semana, a cada uno:
 2. ¿Qué te gustó más de esto?
 3. ¿Seguirías una semana más?
 4. **¿Le dirías a otro grupo tuyo que lo pruebe?**
+
+### Las cinco preguntas de la mecánica
+
+La semana de migración tiene que contestar además lo que introdujo [`05-mecanica.md`](05-mecanica.md). Son las que deciden si el motor funciona:
+
+1. **¿Entran a la hora de la ronda?** Es la apuesta central. Si cada uno pasa cuando quiere, no hay producto.
+2. **¿Qué guardan?** Lo que la gente salva es la mejor lista de features que vamos a tener.
+3. **¿Alguien se enojó por algo que perdió?** Cuánto, y si volvió igual.
+4. **¿La racha los hizo hablar o los hizo fingir?** Si aparecen mensajes vacíos para sostener el número, la regla de tres personas no alcanza.
+5. **¿Se les pasó algo importante por no tener notificaciones?** Si sí, confirma que Ronda es la segunda app y no la primera — que es justo lo que queremos saber.
 
 ### Qué significa cada resultado
 

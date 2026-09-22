@@ -77,6 +77,14 @@ Acá hay una tensión real y conviene resolverla explícitamente en vez de descu
 - Lo reportado se conserva por un plazo definido y acotado, para poder actuar y para poder responder a un requerimiento judicial.
 - El resto no se toca.
 
+### Reportar congela
+
+Con la mecánica de vencimiento ([`05-mecanica.md`](05-mecanica.md)) esto se vuelve crítico: si todo se borra a las 24 horas, un reporte que llega tarde llega a un chat vacío, y quedamos sin nada que mirar y sin nada que entregarle a un juzgado.
+
+> **En el momento en que alguien reporta, lo reportado se preserva aparte y deja de vencer.** Es la única excepción a la regla de borrado del producto.
+
+Va escrita en la política de privacidad con todas las letras, porque una excepción no declarada a una promesa de borrado es exactamente lo que destruye la confianza que estamos construyendo. Y el que reporta tiene que verlo en el momento: *"esto se guarda para que lo podamos revisar"*.
+
 **Señales que sí se miran, sin leer contenido:** cuenta nueva que manda muchas invitaciones, cuenta con muchos bloqueos en poco tiempo, cuenta reportada por varias personas distintas. Son metadatos de comportamiento, no mensajes. Detectan al abusivo sin abrir la correspondencia de nadie.
 
 **Y el límite honesto:** una app sin escaneo de contenido no puede prometer que detecta todo. La promesa que sí se puede sostener es: **reportar es fácil, el reporte lo lee una persona, y hay respuesta en menos de 24 horas.** Eso se cumple o no se dice.
@@ -137,7 +145,20 @@ Hay que tenerlo escrito antes de que pase, porque el día que pasa no se improvi
 - ❌ **No vendemos ni compartimos datos** con terceros para marketing.
 - ❌ **No hay publicidad**, y por lo tanto no hay perfilado.
 - ❌ **No prometemos cifrado punta a punta hasta que lo tengamos.** En la Fase 1 hay TLS en tránsito y cifrado en reposo, y así figura en la política de privacidad. Mentir sobre esto es la forma más rápida de perder al único público que nos importa.
-- ❌ **No usamos patrones oscuros** para retener: sin rachas, sin castigo por no abrir la app, sin notificaciones inventadas. La app avisa cuando alguien te escribió y nada más.
+- ❌ **No cobramos por recuperar nada.** Ningún plan pago devuelve un mensaje vencido ni una racha perdida.
+- ❌ **No inventamos notificaciones.** Nada de "alguien miró tu perfil", "te extrañan" o "hace 3 días que no entrás".
+
+### Sobre el motor de retención
+
+El borrador 2 de este documento decía: *"sin rachas, sin castigo por no abrir la app"*. El borrador 3 cambió eso, y no tiene sentido dejarlo escrito como si no hubiera pasado.
+
+**El motor de Ronda es que entres para no perder lo del día.** Hay rachas. Eso funciona y es, honestamente, el tipo de mecanismo por el que las apps sociales para jóvenes reciben críticas y cada vez más regulación. La línea que trazamos, y que hay que sostener producto adentro, es una sola:
+
+> **Presión para aparecer, sí. Castigo por irte, no.**
+
+En concreto: el vencimiento se anuncia y se ve, la racha tiene perdón semanal y se puede pausar, guardar tiene cupo pero no precio, e irse de una ronda no cuesta nada ni se le avisa a nadie. La tabla completa está en [`05-mecanica.md`](05-mecanica.md) §7.
+
+Y el contrapeso, que es verdad y hay que poder defenderlo con números: **Ronda interrumpe menos que cualquier otra app del teléfono.** Una notificación por día contra las decenas de WhatsApp y de Instagram. El motor es que entres; el trato es que, cuando no entrás, te dejamos en paz.
 
 ---
 
