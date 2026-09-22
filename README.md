@@ -61,11 +61,25 @@ No guarda nada ni manda nada a ningún lado.
 
 ---
 
+## La landing
+
+[`index.html`](index.html) es la página de pre-registro, y es donde cae el tráfico de TikTok. Pide mail, edad y —lo que más importa— **con qué grupo entrarías y cuántos son**: la unidad de migración es el grupo, así que la lista de espera también tiene que serlo.
+
+### Antes de compartirla, dos cosas
+
+**1. Conectar el formulario.** Sin esto la página se ve bien pero **no guarda los registros**. Está hecho a propósito: prefiere avisar que falta configurarlo antes que tragarse un contacto en silencio.
+
+1. Entrá a [formspree.io](https://formspree.io) y creá una cuenta (el plan gratis alcanza para la validación).
+2. Creá un formulario nuevo. Te va a dar una URL tipo `https://formspree.io/f/xxxxxxxx`.
+3. Abrí `index.html`, buscá `const FORM_ENDPOINT = "";` y pegá la URL entre las comillas.
+
+**2. Cambiar el titular por uno que no sea nuestro.** El que está ahora es un marcador de posición. Según [`docs/02-fase-0.md`](docs/02-fase-0.md), el titular tiene que salir de **las frases textuales de las 20 entrevistas**, no de nuestra imaginación. Anotá lo que digan, literal, y usá eso.
+
+> ⚠️ **El torneo aparece como plan, no como convocatoria.** La sección dice explícitamente que todavía no está abierto y que cuando arranque va a tener bases y condiciones. **No cambiar eso por una convocatoria hasta tener las bases publicadas y la consulta legal hecha** ([`docs/06-el-juego.md`](docs/06-el-juego.md) §8): anunciar un premio de US$ 10.000 a un público que incluye menores, sin bases, es el tipo de cosa que se arregla caro.
+
 ## Publicar
 
-El repo se publica solo en GitHub Pages con cada push a `main`, mediante [`.github/workflows`](.github/workflows). Queda en `https://valentingattiuni-09.github.io/APP/`.
-
-> ⚠️ **`index.html` en la raíz quedó desactualizado con el pivot.** Es la landing de pre-registro para comercios del borrador 1 y hoy contradice la estrategia. Hay que reescribirla para el público joven — y el titular tiene que salir de las frases textuales de las 20 entrevistas, no de nuestra imaginación (ver `docs/02-fase-0.md`). Mientras tanto, conviene no difundir la URL raíz.
+El repo se publica solo en GitHub Pages con cada push a `main`, mediante [`.github/workflows`](.github/workflows). La landing queda en `https://valentingattiuni-09.github.io/APP/` y el prototipo en `/APP/prototipo/`.
 
 ## Principios innegociables
 

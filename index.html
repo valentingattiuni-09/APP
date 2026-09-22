@@ -3,486 +3,441 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Ronda — Mensajería para comercios argentinos</title>
-<meta name="description" content="La app de mensajería argentina donde tu negocio es dueño de su canal. Sin bajas por algoritmo, sin cargo por mensaje, con tus datos siempre exportables.">
-<meta property="og:title" content="Ronda — Mensajería para comercios argentinos">
-<meta property="og:description" content="Tu canal de ventas está alquilado. Y te lo pueden cerrar mañana.">
+<title>Ronda — Hablás hoy, mañana no quedó nada</title>
+<meta name="description" content="La app donde hablás con tu gente todos los días y al otro día no quedó nada. Sin notificaciones, sin tu familia adentro, sin dar tu número. Anotate para la beta.">
+<meta name="theme-color" content="#151219">
+<meta property="og:title" content="Ronda — Hablás hoy, mañana no quedó nada">
+<meta property="og:description" content="Cierra todos los días a la misma hora y se borra lo del día. Una sola notificación. Anotate con tu grupo.">
 <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@500&family=Instrument+Sans:wght@400;500;600&display=swap">
 <style>
+/* ---------------------------------------------------------------
+   Ronda — landing de pre-registro
+   Comprometida con un solo mundo visual, el mismo de la app: oscuro.
+   Por eso no hay bloques de tema claro; todo se pinta explícito.
+   --------------------------------------------------------------- */
 :root{
-  --ground:#FBFAF8; --surface:#FFFFFF; --surface-2:#F4F3EF;
-  --ink:#111A24; --ink-soft:#33414F; --muted:#5F7183;
-  --accent:#0B6E8F; --accent-bright:#1596BC; --accent-wash:#E6F2F6;
-  --warm:#B35A24; --warm-wash:#FBEEE4;
-  --line:#E3E2DC; --line-strong:#CFCEC6;
-  --on-accent:#FFFFFF;
-  --shadow:0 1px 2px rgba(17,26,36,.05), 0 8px 24px -12px rgba(17,26,36,.18);
-  color-scheme:light;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --ground:#0C131A; --surface:#121C25; --surface-2:#18242F;
-    --ink:#E9EEF2; --ink-soft:#BDCBD6; --muted:#8CA0B0;
-    --accent:#3FBBDE; --accent-bright:#5FCDEB; --accent-wash:#12303C;
-    --warm:#E0904F; --warm-wash:#2E2018;
-    --line:#22323F; --line-strong:#334757;
-    --on-accent:#07161C;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --ground:#0C131A; --surface:#121C25; --surface-2:#18242F;
-  --ink:#E9EEF2; --ink-soft:#BDCBD6; --muted:#8CA0B0;
-  --accent:#3FBBDE; --accent-bright:#5FCDEB; --accent-wash:#12303C;
-  --warm:#E0904F; --warm-wash:#2E2018;
-  --line:#22323F; --line-strong:#334757;
-  --on-accent:#07161C;
-  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  --bg:#151219;
+  --surface:#1E1A24;
+  --raised:#2A2533;
+  --line:#342E3F;
+  --line-soft:#272231;
+  --ink:#F4F0EA;
+  --ink-2:#B3A8BE;
+  --ink-3:#7C7189;
+  --accent:#F2793D;
+  --on-accent:#1E0B02;
+  --teal:#6FD0C0;
+  --fuego:#FFB23D;
+  --danger:#F4586B;
   color-scheme:dark;
 }
-
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 html,body{margin:0}
 body{
-  background:var(--ground); color:var(--ink);
-  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  background:var(--bg); color:var(--ink);
+  font-family:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto}}
 img{max-width:100%}
-.wrap{max-width:760px; margin:0 auto; padding-inline:20px}
-section{padding-block:clamp(48px,7vw,84px)}
-h1,h2,h3{font-family:"Bricolage Grotesque","IBM Plex Sans",sans-serif; text-wrap:balance; margin:0; letter-spacing:-.02em}
-h1{font-size:clamp(2.1rem,6.2vw,3.5rem); font-weight:800; line-height:1.06}
-h2{font-size:clamp(1.5rem,3.6vw,2.1rem); font-weight:700; line-height:1.15}
-h3{font-size:1.06rem; font-weight:600; line-height:1.3}
-p{margin:0}
-a{color:var(--accent)}
-.eyebrow{
-  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem; font-weight:500;
-  letter-spacing:.14em; text-transform:uppercase; color:var(--muted);
-}
-.lede{font-size:clamp(1.05rem,2.3vw,1.22rem); color:var(--ink-soft); max-width:60ch}
-.stack{display:flex; flex-direction:column}
-.g12{gap:12px} .g16{gap:16px} .g24{gap:24px} .g32{gap:32px} .g40{gap:40px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,select{font:inherit}
+a{color:var(--teal)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
 
-/* ---------- header ---------- */
+.wrap{max-width:820px;margin:0 auto;padding-inline:20px}
+section{padding-block:clamp(52px,8vw,96px)}
+/* el encabezado es fijo: los saltos con # tienen que dejarle lugar */
+[id]{scroll-margin-top:84px}
+
+h1,h2,h3{font-family:"Familjen Grotesk","Instrument Sans",sans-serif;margin:0;letter-spacing:-.025em;text-wrap:balance}
+h1{font-size:clamp(2.4rem,7.4vw,4.1rem);font-weight:700;line-height:1.02}
+h2{font-size:clamp(1.6rem,4.2vw,2.3rem);font-weight:700;line-height:1.12}
+h3{font-size:1.05rem;font-weight:700;line-height:1.3}
+p{margin:0}
+.lede{font-size:clamp(1.08rem,2.4vw,1.28rem);color:var(--ink-2);max-width:56ch}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.7rem;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);
+}
+.col{display:flex;flex-direction:column}
+.g8{gap:8px}.g12{gap:12px}.g16{gap:16px}.g24{gap:24px}.g32{gap:32px}.g44{gap:44px}
+.dim{color:var(--ink-2)}
+.dim3{color:var(--ink-3)}
+
+/* ---------- barra ---------- */
 .top{
-  border-bottom:1px solid var(--line); background:var(--ground);
-  position:sticky; top:0; z-index:20;
+  position:sticky;top:0;z-index:30;background:rgba(21,18,25,.88);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft);
   padding-top:env(safe-area-inset-top,0px);
 }
-.top .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-block:14px}
-.brand{display:flex; align-items:center; gap:10px; font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:1.18rem; letter-spacing:-.02em; color:var(--ink); text-decoration:none}
-.status{
-  font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase;
-  color:var(--warm); background:var(--warm-wash); border:1px solid color-mix(in srgb,var(--warm) 28%,transparent);
-  padding:5px 10px; border-radius:99px; white-space:nowrap;
-}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:13px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand b{font-family:"Familjen Grotesk",sans-serif;font-weight:700;font-size:1.2rem;letter-spacing:-.02em}
+.mark{width:24px;height:24px;border-radius:50%;border:2.5px solid var(--accent);position:relative;flex:none}
+.mark::after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--teal);right:-2px;bottom:2px}
+.top nav{display:flex;align-items:center;gap:8px}
+.top nav a{font-size:.9rem;color:var(--ink-2);text-decoration:none;padding:7px 12px;border-radius:999px}
+.top nav a:hover{color:var(--ink);background:var(--surface)}
+.top nav a.cta{background:var(--accent);color:var(--on-accent);font-weight:600}
+.top nav a.cta:hover{background:var(--accent);filter:brightness(1.07)}
+@media (max-width:520px){ .top nav a.ghost{display:none} }
 
-/* ---------- hero ---------- */
-.hero{padding-block:clamp(44px,8vw,80px) clamp(36px,5vw,56px)}
-.hero h1 em{font-style:normal; color:var(--warm); display:block}
-.ring{width:56px; height:56px; flex:none}
-.ring circle{fill:none; stroke:var(--accent); stroke-width:6}
-.ring .dot{fill:var(--accent-bright); stroke:none}
-@media (prefers-reduced-motion:no-preference){
-  .ring{animation:spin 14s linear infinite; transform-origin:50% 50%}
-  @keyframes spin{to{transform:rotate(360deg)}}
-}
-.cta-row{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
+/* ---------- botones ---------- */
 .btn{
-  display:inline-flex; align-items:center; justify-content:center; gap:8px;
-  font:inherit; font-weight:600; border-radius:10px; padding:13px 22px;
-  border:1px solid transparent; cursor:pointer; text-decoration:none; transition:transform .12s ease, filter .12s ease;
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:15px 26px;border-radius:15px;text-decoration:none;
+  background:var(--accent);color:var(--on-accent);font-weight:600;font-size:1.02rem;
+  transition:filter .12s ease,transform .12s ease;
 }
-.btn:hover{filter:brightness(1.08)}
-.btn:active{transform:translateY(1px)}
-.btn-primary{background:var(--accent); color:var(--on-accent); border-color:var(--accent)}
-.btn-ghost{background:transparent; color:var(--ink); border-color:var(--line-strong)}
-.fineprint{font-size:.88rem; color:var(--muted)}
+.btn:hover{filter:brightness(1.07)}
+.btn:active{transform:scale(.99)}
+.btn.line{background:transparent;border:1px solid var(--line);color:var(--ink-2)}
+.btn.line:hover{border-color:var(--ink-3);color:var(--ink);filter:none}
+.acciones{display:flex;flex-wrap:wrap;gap:12px}
 
-/* ---------- numbers ---------- */
-.numbers{border-block:1px solid var(--line); background:var(--surface-2)}
-.numbers .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px}
-.num{display:flex; flex-direction:column; gap:6px}
-.num b{
-  font-family:"Bricolage Grotesque",sans-serif; font-size:clamp(1.7rem,5vw,2.4rem); font-weight:800;
-  letter-spacing:-.03em; line-height:1; color:var(--accent); font-variant-numeric:tabular-nums;
+/* ---------- portada ---------- */
+.hero{padding-block:clamp(44px,7vw,80px) clamp(40px,6vw,72px)}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.chapa{
+  display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+  padding:6px 13px;border-radius:999px;background:var(--surface);border:1px solid var(--line);
+  font-size:.78rem;color:var(--ink-2);
 }
-.num span{font-size:.93rem; color:var(--ink-soft); line-height:1.4}
-@media (max-width:620px){ .numbers .grid{grid-template-columns:1fr; gap:22px} }
+.chapa i{width:7px;height:7px;border-radius:50%;background:var(--fuego);flex:none;font-style:normal}
 
-/* ---------- comparison ---------- */
-.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:12px; background:var(--surface); box-shadow:var(--shadow)}
-table{border-collapse:collapse; width:100%; min-width:520px; font-size:.95rem}
-th,td{text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top}
-tbody tr:last-child td{border-bottom:none}
-thead th{
-  font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase;
-  color:var(--muted); font-weight:500; background:var(--surface-2); border-bottom:1px solid var(--line-strong);
+/* ---------- el ciclo del día ---------- */
+.ciclo{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:640px){ .ciclo{grid-template-columns:1fr} }
+.paso{
+  background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;
+  display:flex;flex-direction:column;gap:12px;min-height:170px;
 }
-thead th:last-child{color:var(--accent)}
-td:first-child{color:var(--muted)}
-td:last-child{color:var(--ink); font-weight:500}
-@media (max-width:620px){
-  .tablewrap{overflow-x:visible}
-  table{min-width:0}
-  thead{display:none}
-  tbody tr{display:grid; gap:10px; padding:16px; border-bottom:1px solid var(--line)}
-  tbody tr:last-child{border-bottom:none}
-  tbody td{border:none; padding:0; display:grid; gap:3px}
-  tbody td::before{
-    content:attr(data-label); font-family:"IBM Plex Mono",monospace; font-size:.62rem;
-    letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
-  }
-  tbody td:last-child::before{color:var(--accent)}
+.paso .hora{font-family:"IBM Plex Mono",monospace;font-size:.76rem;letter-spacing:.1em;color:var(--ink-3)}
+.paso .cuerpo{flex:1;display:flex;flex-direction:column;gap:5px;justify-content:flex-end}
+.burbu{height:9px;border-radius:999px;background:var(--raised)}
+.burbu.mia{background:var(--accent);opacity:.85;margin-left:auto}
+.paso p{font-size:.92rem;color:var(--ink-2);line-height:1.4}
+.paso.cierre{border-color:rgba(242,121,61,.4);background:linear-gradient(160deg,rgba(242,121,61,.14),var(--surface))}
+.paso.cierre .hora{color:var(--accent)}
+.vacio{flex:1;display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-size:.88rem;text-align:center}
+
+/* ---------- lista de diferenciales ---------- */
+.rasgos{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:20px;overflow:hidden}
+@media (max-width:640px){ .rasgos{grid-template-columns:1fr} }
+.rasgo{background:var(--bg);padding:24px 22px;display:flex;flex-direction:column;gap:9px}
+.rasgo .num{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--accent);letter-spacing:.1em}
+.rasgo p{font-size:.95rem;color:var(--ink-2);line-height:1.45}
+.rasgo.ancho{grid-column:1 / -1}
+
+/* ---------- torneo ---------- */
+.torneo{
+  border:1px solid rgba(242,121,61,.34);border-radius:24px;padding:clamp(24px,4vw,36px);
+  background:linear-gradient(150deg,rgba(242,121,61,.16),rgba(111,208,192,.06));
+}
+.plata{font-family:"Familjen Grotesk",sans-serif;font-size:clamp(2.6rem,8vw,3.6rem);font-weight:700;line-height:1;letter-spacing:-.03em}
+.aclara{
+  border-left:2px solid var(--line);padding-left:16px;font-size:.92rem;color:var(--ink-3);line-height:1.5;
 }
 
-/* ---------- differentials ---------- */
-.diffs{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden}
-.diff{background:var(--surface); padding:24px 22px; display:flex; flex-direction:column; gap:9px}
-.diff .k{font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--accent); letter-spacing:.1em}
-.diff p{font-size:.94rem; color:var(--ink-soft)}
-@media (max-width:620px){ .diffs{grid-template-columns:1fr} }
-
-/* ---------- how ---------- */
-.steps{display:flex; flex-direction:column; gap:0; counter-reset:s}
-.step{display:grid; grid-template-columns:auto 1fr; gap:18px; padding-block:20px; border-bottom:1px solid var(--line)}
-.step:last-child{border-bottom:none}
-.step .n{
-  counter-increment:s; font-family:"IBM Plex Mono",monospace; font-size:.8rem; color:var(--accent);
-  width:30px; height:30px; border-radius:50%; border:1px solid var(--accent); display:grid; place-items:center;
+/* ---------- formulario ---------- */
+.form{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:clamp(22px,4vw,34px)}
+.campos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:560px){ .campos{grid-template-columns:1fr} }
+.campo{display:flex;flex-direction:column;gap:7px}
+.campo.ancho{grid-column:1 / -1}
+.campo label{font-size:.82rem;font-weight:600;color:var(--ink-2)}
+.campo input,.campo select{
+  background:var(--bg);border:1px solid var(--line);border-radius:13px;padding:13px 15px;
+  color:var(--ink);font-size:1rem;outline:none;width:100%;
 }
-.step .n::before{content:counter(s)}
-.step p{font-size:.95rem; color:var(--ink-soft); margin-top:4px}
+.campo input:focus,.campo select:focus{border-color:var(--accent)}
+.campo input::placeholder{color:var(--ink-3)}
+.campo small{font-size:.78rem;color:var(--ink-3)}
+.aviso{margin-top:16px;padding:13px 15px;border-radius:13px;font-size:.92rem;line-height:1.45;display:none}
+.aviso.ok{display:block;background:rgba(111,208,192,.12);border:1px solid rgba(111,208,192,.4);color:var(--teal)}
+.aviso.err{display:block;background:rgba(244,88,107,.1);border:1px solid rgba(244,88,107,.4);color:var(--danger)}
 
-/* ---------- form ---------- */
-.formcard{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:clamp(22px,4vw,34px); box-shadow:var(--shadow)}
-.field{display:flex; flex-direction:column; gap:6px}
-.field label{font-size:.86rem; font-weight:600; color:var(--ink-soft)}
-.field input, .field select{
-  font:inherit; font-size:.97rem; color:var(--ink); background:var(--ground);
-  border:1px solid var(--line-strong); border-radius:9px; padding:11px 13px; width:100%;
-}
-.field input:focus, .field select:focus, .btn:focus-visible, input[type=checkbox]:focus-visible{
-  outline:2px solid var(--accent-bright); outline-offset:2px;
-}
-.two{display:grid; grid-template-columns:1fr 1fr; gap:16px}
-@media (max-width:560px){ .two{grid-template-columns:1fr} }
-.check{display:flex; gap:10px; align-items:flex-start; font-size:.85rem; color:var(--muted); line-height:1.45}
-.check input{margin-top:3px; flex:none; width:16px; height:16px; accent-color:var(--accent)}
-.msg{border-radius:9px; padding:13px 15px; font-size:.92rem; line-height:1.5}
-.msg.ok{background:var(--accent-wash); color:var(--accent); border:1px solid color-mix(in srgb,var(--accent) 30%,transparent)}
-.msg.err{background:var(--warm-wash); color:var(--warm); border:1px solid color-mix(in srgb,var(--warm) 30%,transparent)}
-
-/* ---------- footer ---------- */
-footer{border-top:1px solid var(--line); background:var(--surface-2); padding-block:34px; font-size:.87rem; color:var(--muted)}
-footer a{color:var(--muted)}
-footer .wrap{display:flex; flex-direction:column; gap:14px}
-.sources{font-size:.79rem; line-height:1.7}
+/* ---------- pie ---------- */
+.pie{border-top:1px solid var(--line-soft);padding-block:36px 48px;padding-bottom:calc(48px + env(safe-area-inset-bottom,0px))}
+.pie .enlaces{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.9rem}
+.pie p{font-size:.86rem;color:var(--ink-3);line-height:1.5}
+hr{border:0;border-top:1px solid var(--line-soft);margin:0}
 </style>
 </head>
 <body>
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#top">
-      <svg class="ring" viewBox="0 0 48 48" aria-hidden="true" style="width:26px;height:26px">
-        <circle cx="24" cy="24" r="17"></circle>
-        <circle class="dot" cx="24" cy="7" r="5"></circle>
-      </svg>
-      Ronda
-    </a>
-    <span class="status">En construcción</span>
+    <a class="brand" href="#top"><span class="mark"></span><b>Ronda</b></a>
+    <nav>
+      <a class="ghost" href="prototipo/">Ver el prototipo</a>
+      <a class="cta" href="#anotarse">Anotarme</a>
+    </nav>
   </div>
 </header>
 
 <main id="top">
 
+  <!-- ---------------- portada ---------------- -->
   <section class="hero">
-    <div class="wrap stack g32">
-      <div class="stack g24">
-        <p class="eyebrow">Mensajería argentina para comercios</p>
-        <h1>Tu canal de ventas está alquilado.<em>Y te lo pueden cerrar mañana.</em></h1>
-        <p class="lede">
-          Miles de comercios argentinos venden por WhatsApp. Muchos ya perdieron la cuenta
-          de un día para el otro, sin aviso, sin explicación y sin nadie a quien reclamarle.
-          Con los contactos adentro.
-        </p>
-        <p class="lede">
-          <strong>Ronda es la app de mensajería donde tu negocio es dueño de su canal.</strong>
-          Reglas publicadas en vez de secretas. Aviso antes de suspender. Una persona
-          que te atiende, acá. Y tus datos exportables cuando quieras.
-        </p>
+    <div class="wrap col g32">
+      <div class="col g24">
+        <span class="chapa"><i></i> Todavía no existe. La estamos construyendo.</span>
+        <h1>Hablás hoy.<br>Mañana <em>no quedó nada</em>.</h1>
+        <p class="lede">Ronda cierra todos los días a la misma hora y se borra lo del día. Lo que querés que quede, lo guardás vos. Y no te avisa nada hasta una hora antes de cerrar.</p>
       </div>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="#sumate">Sumarme a la lista</a>
-        <a class="btn btn-ghost" href="#comparacion">Ver la diferencia</a>
-      </div>
-      <p class="fineprint">
-        Todavía no hay app: estamos hablando con comercios antes de construirla.
-        Quien se anote ahora entra a la prueba cerrada y define qué se hace primero.
-      </p>
-    </div>
-  </section>
-
-  <section class="numbers">
-    <div class="wrap">
-      <div class="grid">
-        <div class="num">
-          <b>92–99%</b>
-          <span>de penetración tiene WhatsApp en Argentina. Es infraestructura, no una app más.</span>
-        </div>
-        <div class="num">
-          <b>20–30</b>
-          <span>mensajes por día alcanzan para que te marquen como envío masivo y te suspendan.</span>
-        </div>
-        <div class="num">
-          <b>Ninguno</b>
-          <span>es el número de teléfono al que podés llamar cuando te bajan la cuenta.</span>
-        </div>
+      <div class="acciones">
+        <a class="btn" href="#anotarse">Anotarme con mi grupo</a>
+        <a class="btn line" href="prototipo/">Probar el prototipo</a>
       </div>
     </div>
   </section>
 
-  <section id="comparacion">
-    <div class="wrap stack g32">
-      <div class="stack g12">
-        <p class="eyebrow">La diferencia</p>
-        <h2>No cambiamos el límite. Cambiamos la arbitrariedad.</h2>
-        <p class="lede">
-          Que exista un límite está bien: sin control, cualquier app de mensajería se llena
-          de spam en seis meses. El problema no es que haya reglas — es que son secretas,
-          se aplican sin aviso y no hay a quién reclamarle.
-        </p>
-      </div>
-      <div class="tablewrap">
-        <table>
-          <thead>
-            <tr><th scope="col">Hoy, con WhatsApp Business</th><th scope="col">Con Ronda</th></tr>
-          </thead>
-          <tbody>
-            <tr><td data-label="Hoy, con WhatsApp Business">Límites secretos que nadie te dice</td><td data-label="Con Ronda">Límites publicados y claros</td></tr>
-            <tr><td data-label="Hoy, con WhatsApp Business">Te suspenden sin aviso previo</td><td data-label="Con Ronda">Te avisamos antes, y con el motivo</td></tr>
-            <tr><td data-label="Hoy, con WhatsApp Business">Apelación sin plazo ni respuesta</td><td data-label="Con Ronda">Apelación con plazo máximo y una persona</td></tr>
-            <tr><td data-label="Hoy, con WhatsApp Business">Pagás por mensaje, incluso los que rebotan</td><td data-label="Con Ronda">Abono mensual en pesos, previsible</td></tr>
-            <tr><td data-label="Hoy, con WhatsApp Business">Si te caen, perdés los contactos</td><td data-label="Con Ronda">Exportás todo cuando se te cante</td></tr>
-            <tr><td data-label="Hoy, con WhatsApp Business">Soporte por formulario, en inglés</td><td data-label="Con Ronda">Soporte en horario argentino, en castellano</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
+  <hr>
 
+  <!-- ---------------- el problema ---------------- -->
   <section>
-    <div class="wrap stack g32">
-      <div class="stack g12">
-        <p class="eyebrow">Por qué nos importa</p>
-        <h2>Cuatro cosas que Meta no te puede dar</h2>
-      </div>
-      <div class="diffs">
-        <div class="diff">
-          <span class="k">01</span>
-          <h3>No te bajamos la cuenta por un algoritmo</h3>
-          <p>Meta opera a escala planetaria y por eso automatiza todo. Nosotros no: acá hay gente que revisa y que te responde.</p>
-        </div>
-        <div class="diff">
-          <span class="k">02</span>
-          <h3>Los datos son tuyos y te los llevás</h3>
-          <p>Contactos, conversaciones e historial, exportables en formato abierto, siempre. Suena en contra nuestra. Es la razón para confiarnos el canal.</p>
-        </div>
-        <div class="diff">
-          <span class="k">03</span>
-          <h3>Argentino, no traducido</h3>
-          <p>Precios en pesos, factura A/B/C, Mercado Pago, y soporte que entiende qué es un monotributista. Funciona con poca señal y en teléfonos de gama baja.</p>
-        </div>
-        <div class="diff">
-          <span class="k">04</span>
-          <h3>Tu cliente elige recibirte</h3>
-          <p>Se suscribe al comercio que quiere y se baja en un toque. Por eso el que queda suscripto te lee de verdad, en vez de mandarte a spam.</p>
-        </div>
-      </div>
+    <div class="wrap col g24">
+      <span class="eyebrow">Por qué</span>
+      <h2>WhatsApp se volvió la app de tu vieja.</h2>
+      <p class="lede">El grupo de la familia, el del consorcio, el del curso con las madres. Todo en la misma bandeja donde hablás con tus amigos, con el mismo tono de notificación, guardado para siempre.</p>
+      <p class="lede">Ronda no viene a reemplazarlo. Dejalo donde está, con tu tía adentro. Esto es para el otro rato.</p>
     </div>
   </section>
 
+  <!-- ---------------- el ciclo ---------------- -->
   <section>
-    <div class="wrap stack g32">
-      <div class="stack g12">
-        <p class="eyebrow">Cómo funciona</p>
-        <h2>Tres pasos, y el canal es tuyo</h2>
+    <div class="wrap col g32">
+      <div class="col g16">
+        <span class="eyebrow">Cómo funciona</span>
+        <h2>La ronda cierra a las 22.</h2>
+        <p class="lede">No a las 24 horas de cada mensaje: a una hora fija, la misma para todo el grupo. Por eso están todos juntos cuando entrás.</p>
       </div>
-      <div class="steps">
-        <div class="step">
-          <span class="n" aria-hidden="true"></span>
-          <div>
-            <h3>Ponés el QR en el mostrador</h3>
-            <p>También va como link en tu Instagram o en tu web. Tu cliente escanea y se suscribe a tu comercio.</p>
+
+      <div class="ciclo">
+        <div class="paso">
+          <span class="hora">14:30</span>
+          <div class="cuerpo">
+            <div class="burbu" style="width:72%"></div>
+            <div class="burbu mia" style="width:54%"></div>
+            <div class="burbu" style="width:83%"></div>
+            <div class="burbu" style="width:41%"></div>
+            <div class="burbu mia" style="width:66%"></div>
           </div>
+          <p>Se habla todo el día. Nada suena, nada vibra.</p>
         </div>
-        <div class="step">
-          <span class="n" aria-hidden="true"></span>
-          <div>
-            <h3>Le escribís sin miedo</h3>
-            <p>Ofertas, turnos, estado del pedido. A gente que pidió recibirlo, con un abono fijo en pesos y sin contador de mensajes corriendo.</p>
+
+        <div class="paso cierre">
+          <span class="hora">21:00 · el único aviso</span>
+          <div class="cuerpo">
+            <div class="burbu" style="width:60%"></div>
+            <div class="burbu mia" style="width:78%"></div>
+            <div class="burbu" style="width:47%"></div>
           </div>
+          <p><b style="color:var(--ink)">“Los pibes cierra en 1 hora.”</b> Ahí sí, una vez por día, con lo que se va a borrar.</p>
         </div>
-        <div class="step">
-          <span class="n" aria-hidden="true"></span>
-          <div>
-            <h3>El canal no te lo puede sacar nadie</h3>
-            <p>Y si algún día querés irte, te llevás la base de suscriptores entera. Sin pedir permiso.</p>
-          </div>
+
+        <div class="paso">
+          <span class="hora">22:00</span>
+          <div class="vacio">se borró todo<br>menos lo que guardaste</div>
+          <p>Mañana arranca en blanco. Sin historial, sin archivo, sin nada para buscar.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="sumate">
-    <div class="wrap stack g32">
-      <div class="stack g12">
-        <p class="eyebrow">Prueba cerrada</p>
-        <h2>Contanos de tu comercio</h2>
-        <p class="lede">
-          Estamos hablando con 20 comercios argentinos antes de escribir una línea de código.
-          Si dejás tus datos te escribimos para una charla de 15 minutos — y entrás primero
-          cuando esté la app.
-        </p>
+  <hr>
+
+  <!-- ---------------- diferenciales ---------------- -->
+  <section>
+    <div class="wrap col g32">
+      <div class="col g16">
+        <span class="eyebrow">Qué tiene</span>
+        <h2>Seis cosas, y todas incomodan a alguien.</h2>
       </div>
 
-      <form class="formcard stack g24" id="form" novalidate>
-        <div class="two">
-          <div class="field">
-            <label for="comercio">Nombre del comercio</label>
-            <input id="comercio" name="comercio" type="text" required autocomplete="organization" placeholder="Panadería La Esquina">
+      <div class="rasgos">
+        <div class="rasgo">
+          <span class="num">01</span>
+          <h3>Una notificación por día</h3>
+          <p>Una hora antes de que cierre, diciendo exactamente qué se pierde. De mensajes nuevos, ninguna. Ni una.</p>
+        </div>
+        <div class="rasgo">
+          <span class="num">02</span>
+          <h3>Sos un @, no un número</h3>
+          <p>No te pedimos el teléfono ni la agenda. Podés hablar con alguien sin darle tu número, y cortar sin quedar agendado de por vida.</p>
+        </div>
+        <div class="rasgo">
+          <span class="num">03</span>
+          <h3>Grupos con temas adentro</h3>
+          <p>#general, #previa, #parcial, #memes. Seguís uno y silenciás el otro sin irte del grupo. Y a nadie se lo agrega sin que acepte.</p>
+        </div>
+        <div class="rasgo">
+          <span class="num">04</span>
+          <h3>Sin “en línea”, sin “últ. vez”</h3>
+          <p>No están apagados: no existen. Y el tilde de leído es para los dos lados — si lo apagás, dejás de ver el de los demás.</p>
+        </div>
+        <div class="rasgo">
+          <span class="num">05</span>
+          <h3>Fotos de una sola vez</h3>
+          <p>Se abren, se ven, se van. No se guardan y no se reenvían. Si alguien saca captura, se avisa.</p>
+        </div>
+        <div class="rasgo">
+          <span class="num">06</span>
+          <h3>Audios que salen como video</h3>
+          <p>Vienen transcriptos, y el audio del grupo se convierte en un video vertical listo para subir. Sin editar nada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- ---------------- torneo ---------------- -->
+  <section>
+    <div class="wrap col g24">
+      <span class="eyebrow">Lo que viene</span>
+      <div class="torneo">
+        <div class="col g16">
+          <span class="eyebrow" style="color:rgba(244,240,234,.55)">El torneo, cuando la app esté en la calle</span>
+          <div class="plata">US$ 10.000<br>para tu ronda</div>
+          <p class="lede" style="color:var(--ink-2)">Todos los meses, los diez grupos que más hablaron se reparten el pozo. Participar va a ser gratis: no hay nada que comprar para jugar.</p>
+          <p class="lede" style="color:var(--ink-2)">Y el pozo no es un número inventado — es un porcentaje de lo que entra, publicado antes de que empiece el mes. Cuantos más somos, más grande es.</p>
+        </div>
+      </div>
+      <p class="aclara"><b style="color:var(--ink-2)">Esto no es una convocatoria.</b> El torneo todavía no está abierto y no se puede participar. Cuando arranque va a tener bases y condiciones publicadas, reglas de edad y todo lo que corresponde. Por ahora es el plan, y te lo contamos porque preferimos que sepas para dónde va esto.</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- ---------------- formulario ---------------- -->
+  <section id="anotarse">
+    <div class="wrap col g32">
+      <div class="col g16">
+        <span class="eyebrow">Beta cerrada</span>
+        <h2>Anotate con tu grupo, no solo.</h2>
+        <p class="lede">Ronda no sirve de a uno: una ronda se abre recién cuando entran cinco. Así que decinos con quiénes entrarías y te avisamos a todos juntos.</p>
+      </div>
+
+      <form class="form" id="form" novalidate>
+        <div class="campos">
+          <div class="campo">
+            <label for="nombre">Cómo te llamás</label>
+            <input id="nombre" name="nombre" autocomplete="given-name" required>
           </div>
-          <div class="field">
-            <label for="rubro">Rubro</label>
-            <select id="rubro" name="rubro" required>
-              <option value="">Elegí uno</option>
-              <option>Indumentaria</option>
-              <option>Gastronomía</option>
-              <option>Servicios profesionales</option>
-              <option>Salud y estética</option>
-              <option>Inmobiliaria</option>
-              <option>Comercio minorista</option>
-              <option>E-commerce</option>
-              <option>Otro</option>
+          <div class="campo">
+            <label for="mail">Tu mail</label>
+            <input id="mail" name="mail" type="email" autocomplete="email" placeholder="vos@mail.com" required>
+          </div>
+          <div class="campo">
+            <label for="edad">Edad</label>
+            <select id="edad" name="edad" required>
+              <option value="">Elegí…</option>
+              <option>14 o 15</option>
+              <option>16 o 17</option>
+              <option>18 a 20</option>
+              <option>21 a 24</option>
+              <option>25 o más</option>
             </select>
           </div>
-        </div>
-        <div class="two">
-          <div class="field">
-            <label for="email">Mail</label>
-            <input id="email" name="email" type="email" required autocomplete="email" placeholder="vos@tucomercio.com.ar">
+          <div class="campo">
+            <label for="cuantos">¿Cuántos son en tu grupo?</label>
+            <input id="cuantos" name="cuantos" type="number" min="1" max="99" inputmode="numeric" placeholder="8">
           </div>
-          <div class="field">
-            <label for="telefono">WhatsApp</label>
-            <input id="telefono" name="telefono" type="tel" required autocomplete="tel" placeholder="11 5555-5555">
+          <div class="campo ancho">
+            <label for="grupo">¿Con qué grupo entrarías?</label>
+            <input id="grupo" name="grupo" placeholder="la comisión de sistemas, los pibes del club, la banda…">
+            <small>Es la pregunta que más nos sirve. No hace falta que sean nombres: con saber qué tipo de grupo es, alcanza.</small>
           </div>
         </div>
-        <div class="field">
-          <label for="suspendido">¿Alguna vez te suspendieron o te bajaron la cuenta?</label>
-          <select id="suspendido" name="suspendido" required>
-            <option value="">Elegí una</option>
-            <option>Sí, y perdí ventas por eso</option>
-            <option>Sí, pero la recuperé rápido</option>
-            <option>No, pero me preocupa que pase</option>
-            <option>No, nunca tuve problemas</option>
-          </select>
+
+        <div style="margin-top:20px">
+          <button class="btn" type="submit" id="enviar" style="width:100%">Anotarme</button>
         </div>
-        <label class="check">
-          <input type="checkbox" id="consent" name="consent" required>
-          <span>Acepto que me contacten por mail o WhatsApp sobre Ronda. Mis datos no se comparten con terceros y puedo pedir que los borren cuando quiera.</span>
-        </label>
-        <div class="cta-row">
-          <button class="btn btn-primary" type="submit" id="submit">Sumarme a la lista</button>
-          <span class="fineprint">Gratis. Sin compromiso.</span>
-        </div>
-        <div id="msg" class="msg" hidden></div>
+        <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+        <p style="margin-top:16px;font-size:.84rem;color:var(--ink-3);line-height:1.5">
+          Te escribimos sólo para avisarte cuando abra la beta. Nada de publicidad, no le pasamos tu mail a nadie, y te podés borrar contestando cualquier mail nuestro.
+        </p>
       </form>
     </div>
   </section>
 
 </main>
 
-<footer>
-  <div class="wrap">
-    <p><strong style="color:var(--ink-soft)">Ronda</strong> — proyecto en etapa de validación. Todavía no es un producto disponible.</p>
-    <p class="sources">
-      Datos citados: penetración y uso de WhatsApp en Argentina según
-      <a href="https://mercado.com.ar/tendencias/whatsapp-se-consolida-como-infraestructura-social-en-argentina" target="_blank" rel="noopener">informe Infobip</a>
-      e <a href="https://www.infobae.com/tecno/2025/04/04/radiografia-digital-que-hacen-los-argentinos-en-internet-y-en-que-redes-sociales-pasan-mas-tiempo/" target="_blank" rel="noopener">Infobae</a>;
-      políticas de suspensión según el
-      <a href="https://faq.whatsapp.com/723378546580115" target="_blank" rel="noopener">Centro de Ayuda de WhatsApp</a>
-      y la <a href="https://developers.facebook.com/documentation/business-messaging/whatsapp/policy-enforcement" target="_blank" rel="noopener">documentación de Meta</a>.
-      Tratamiento de datos conforme a la <a href="https://www.argentina.gob.ar/justicia/derechofacil/leysimple/datos-personales" target="_blank" rel="noopener">Ley 25.326</a>.
+<footer class="pie">
+  <div class="wrap col g24">
+    <div class="enlaces">
+      <a href="prototipo/">Probar el prototipo</a>
+      <a href="https://github.com/valentingattiuni-09/APP">El proyecto en GitHub</a>
+      <a href="https://github.com/valentingattiuni-09/APP/blob/main/docs/01-vision.md">Qué estamos construyendo</a>
+    </div>
+    <p>
+      Ronda está en fase de validación: no hay app todavía, ni fecha. Lo que hay es un prototipo, un plan escrito y la intención de no construir algo que nadie pidió.
+      Proyecto de <a href="https://github.com/valentingattiuni-09/Sobra-Agencia-de-marketing-digital-">Sobra</a>, desde Argentina.
     </p>
   </div>
 </footer>
 
 <script>
-// ---------------------------------------------------------------------------
-// CONFIGURACIÓN DEL FORMULARIO
-// Pegá acá el endpoint de Formspree (https://formspree.io — plan gratis).
-// Se crea en 2 minutos: creás el form, te dan una URL tipo
-// https://formspree.io/f/xxxxxxxx y la pegás entre las comillas de abajo.
-// Mientras esté vacío, el formulario avisa que falta configurarlo en vez de
-// tragarse los registros en silencio.
-// ---------------------------------------------------------------------------
+"use strict";
+
+/* Pegá acá la URL del formulario de Formspree (https://formspree.io/f/xxxxxxxx).
+   Mientras esté vacío la página avisa en vez de tragarse un registro en silencio. */
 const FORM_ENDPOINT = "";
 
-const form = document.getElementById("form");
-const msgEl = document.getElementById("msg");
-const submitBtn = document.getElementById("submit");
+const form  = document.getElementById("form");
+const aviso = document.getElementById("aviso");
+const boton = document.getElementById("enviar");
 
-function show(kind, text){
-  msgEl.className = "msg " + kind;
-  msgEl.textContent = text;
-  msgEl.hidden = false;
+function mostrar(tipo, texto){
+  aviso.className = "aviso " + tipo;
+  aviso.textContent = texto;
 }
 
-form.addEventListener("submit", async (e) => {
+form.addEventListener("submit", async e => {
   e.preventDefault();
 
-  if (!form.checkValidity()) {
-    show("err", "Faltan datos. Revisá los campos marcados y probá de nuevo.");
-    form.reportValidity();
+  const datos = Object.fromEntries(new FormData(form).entries());
+
+  if(!datos.nombre.trim())  return mostrar("err", "Falta tu nombre.");
+  if(!/^\S+@\S+\.\S+$/.test(datos.mail || "")) return mostrar("err", "Ese mail no parece un mail. Revisalo y probá de nuevo.");
+  if(!datos.edad)           return mostrar("err", "Falta la edad.");
+
+  if(!FORM_ENDPOINT){
+    mostrar("err", "El formulario todavía no está conectado, así que esto no se guardó. Configurá FORM_ENDPOINT en index.html antes de compartir la página.");
+    console.warn("Registro capturado pero NO enviado (falta FORM_ENDPOINT):", datos);
     return;
   }
 
-  const data = Object.fromEntries(new FormData(form).entries());
+  boton.disabled = true;
+  boton.textContent = "Mandando…";
 
-  if (!FORM_ENDPOINT) {
-    show("err", "El formulario todavía no está conectado. Configurá FORM_ENDPOINT en index.html antes de compartir la página.");
-    console.warn("Registro capturado pero NO enviado (falta FORM_ENDPOINT):", data);
-    return;
-  }
-
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Enviando…";
-
-  try {
+  try{
     const res = await fetch(FORM_ENDPOINT, {
       method: "POST",
       headers: { "Accept": "application/json", "Content-Type": "application/json" },
-      body: JSON.stringify(data)
+      body: JSON.stringify(datos)
     });
-    if (!res.ok) throw new Error("HTTP " + res.status);
+    if(!res.ok) throw new Error("respuesta " + res.status);
     form.reset();
-    show("ok", "Listo, quedaste anotado. Te escribimos en los próximos días para coordinar la charla.");
-  } catch (err) {
-    show("err", "No pudimos enviar el formulario. Probá de nuevo en un rato, o escribinos directo por mail.");
+    mostrar("ok", "Listo. Te escribimos cuando abra la beta — y avisá a tu grupo, que sin ellos no se abre nada.");
+  }catch(err){
     console.error(err);
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Sumarme a la lista";
+    mostrar("err", "No se pudo mandar. Probá de nuevo en un rato.");
+  }finally{
+    boton.disabled = false;
+    boton.textContent = "Anotarme";
   }
 });
 </script>
-
 </body>
 </html>
